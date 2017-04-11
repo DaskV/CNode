@@ -1,0 +1,53 @@
+.my-list{
+    img{
+        width: 1.8rem;
+        height: 1.8rem;
+        border-radius: 50px;
+        border: 1px solid #eee;
+        background-color: rgba(0, 0, 0, 0.2);
+    }
+    .title{
+        span{
+            vertical-align: middle;
+            
+        }
+        .up{
+            color: #108ee9;       
+            font-weight: bold;     
+        }
+        .good{
+            color:red;
+            padding-left: 0.2rem;
+            padding-right: 0.3rem;
+            font-weight: bold;
+        }
+        .text{
+            color: #333;
+            display: inline-block;
+            padding: 0;
+            width: 80%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    }
+    .replycount,.viewcount{
+        font-size: 0.7rem;
+        .iconfont{
+             font-size: 0.7rem;
+            margin-left: 0.3rem;
+        }
+    }
+    .viewcount{
+      margin-left: 0.5rem
+    }
+    .time{
+        float: right;
+        font-size: 0.5rem;
+        margin-top: 0.2rem;
+    }
+}
+.loading{
+    padding-left: 40%;
+    margin-top: 1rem;
+}

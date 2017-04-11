@@ -1,0 +1,17 @@
+.Headers{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 10;    
+    animation: animate 0.5s;
+    transform-origin: 0% 0%;
+}
+
+@keyframes animate{
+    0%{
+        top: -100%;
+    }
+    100%{
+        top: 0;
+    }
+}
