@@ -8,10 +8,10 @@ const TabPane = Tabs.TabPane;
 class Header extends Component {
 
     callback(key){
-        console.log('onChange', key);
+        // console.log('onChange', key);
     }
     handleTabClick(key){
-         console.log('onTabClick', key);
+        //  console.log('onTabClick', key);
     }
     render() {
         return (
@@ -30,7 +30,7 @@ class Header extends Component {
                     ><span className="title">NodeJS-CN论坛</span>
                </NavBar>
                <Tabs defaultActiveKey="1" onChange={this.callback} onTabClick={this.handleTabClick}  pageSize={5} className="tab">
-                    {/*<TabPane tab="选项卡一" key="1">
+                    <TabPane tab="选项卡一" key="1">
                         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '5rem', backgroundColor: '#fff' }} >
                         选项卡一内容
                         </div>
@@ -44,12 +44,7 @@ class Header extends Component {
                         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '5rem', backgroundColor: '#fff' }}>
                         选项卡三内容
                         </div>
-                    </TabPane>*/}
-                    {this.props.tabs.map((tab,i)=>
-                      <TabPane tab={tab.title} key={i}>
-                       
-                      </TabPane>
-                    )}
+                    </TabPane>
                </Tabs>
 
             </div>

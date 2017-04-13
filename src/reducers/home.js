@@ -1,5 +1,4 @@
 import {REQUEST_TOPICS, RECEIVE_TOPICS, SELECT_TAB} from '../action'
-
 function select_tab(state, action) {
     switch (action.type) {
         case SELECT_TAB:
@@ -33,6 +32,39 @@ function tabItemData(state = {
                 topics: action.topics,
                 limit: action.limit
             }
+        default:
+            return state
 
     }
 }
+
+function tabData(state = {}, action) {
+    switch (action.type) {
+        case RECEIVE_TOPICS:
+        case REQUEST_TOPICS:
+            return {
+                ...state,
+                [action.tab]: tabItemData(state[action.tab], action)
+            }
+        default:
+            return state
+    }
+}
+
+function home(state = {
+    selectTab: 'all',
+    tabData: {}
+}, action) {
+    if (state) {
+        const newtab = select_tab(state.selectTab, action);
+        const newData = tabData(state.tabData, action);
+        return {
+            ...state,
+            selectTab: newtab,
+            tabData: newData
+        }
+    }
+    return state
+}
+
+export default home

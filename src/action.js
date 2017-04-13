@@ -33,7 +33,7 @@ function select_tab(tab){
 }
 
 
-function fetch_topics(tab,page=1,limit=20){
+export function fetch_topics(tab,page=1,limit=20){
     return function(dispatch){
          dispatch(request_topics(tab))
          fetch(`https://cnodejs.org/api/v1/topics?tab=${tab}&page=${page}&limit=${limit}`)
