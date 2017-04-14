@@ -7,14 +7,22 @@ const TabPane = Tabs.TabPane;
 
 class Header extends Component {
 
-    callback(key){
-        // console.log('onChange', key);
-    }
-    handleTabClick(key){
-        //  console.log('onTabClick', key);
+    callback=(key)=>{
+       this.props.OnhandleTabClick(this.props.tabs[key].filter);
     }
     render() {
-        return (
+        
+        function ActiveKey(filter){
+            switch(filter){
+                case "all":return "0";
+                case "filter":return "1";
+                case "share":return "2";
+                case "ask":return "3";
+                case "job":return "4";
+            }
+        }
+
+        return (       
             <div>
                 <NavBar
                     className="header"
@@ -29,22 +37,15 @@ class Header extends Component {
                  
                     ><span className="title">NodeJS-CN论坛</span>
                </NavBar>
-               <Tabs defaultActiveKey="1" onChange={this.callback} onTabClick={this.handleTabClick}  pageSize={5} className="tab">
-                    <TabPane tab="选项卡一" key="1">
-                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '5rem', backgroundColor: '#fff' }} >
-                        选项卡一内容
-                        </div>
-                    </TabPane>
-                    <TabPane tab="选项卡二" key="2">
-                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '5rem', backgroundColor: '#fff' }}>
-                        选项卡二内容
-                        </div>
-                    </TabPane>
-                    <TabPane tab="选项卡三" key="3">
-                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '5rem', backgroundColor: '#fff' }}>
-                        选项卡三内容
-                        </div>
-                    </TabPane>
+               <Tabs defaultActiveKey={ActiveKey(this.props.filter)} onChange={this.callback} onTabClick={this.handleTabClick}  className="tab">
+                    {                       
+                        this.props.tabs.map((tab,i)=>
+                            
+                             <TabPane tab={tab.title} key={i}>
+                                 {this.props.children}
+                            </TabPane>
+                        )
+                    }
                </Tabs>
 
             </div>
@@ -52,6 +53,8 @@ class Header extends Component {
     }
 }
 
-Header.propTypes = {};
+Header.propTypes = {
+    OnhandleTabClick:PropTypes.func.isRequired
+};
 
 export default Header;

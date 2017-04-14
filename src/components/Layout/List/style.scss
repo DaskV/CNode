@@ -14,10 +14,11 @@
         .up{
             color: #108ee9;       
             font-weight: bold;     
+            padding-right: 0.3rem;
         }
         .good{
             color:red;
-            padding-left: 0.2rem;
+            
             padding-right: 0.3rem;
             font-weight: bold;
         }
@@ -46,8 +47,4 @@
         font-size: 0.5rem;
         margin-top: 0.2rem;
     }
-}
-.loading{
-    padding-left: 40%;
-    margin-top: 1rem;
 }

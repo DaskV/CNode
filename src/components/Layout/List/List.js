@@ -1,34 +1,38 @@
 import React, { Component, PropTypes } from 'react';
-import { List,ActivityIndicator } from 'antd-mobile';
+import { List} from 'antd-mobile';
 import './style.scss';
+import getTime from '../../../utils/getTime';
+
 const Item = List.Item;
 const Brief = Item.Brief;  //设置了Click事件会有material水波纹点击效果
+
 class ListArticle extends Component {
     render() {
+        const topics= this.props.topics;
         return (
             <div>
                  <List  className="my-list">
-                     <Item
-                        multipleLine
-                        thumb="https://avatars.githubusercontent.com/u/227713?v=3&s=120"
-                        onClick={() => {}}
-                        platform="android"
-                        >
-                        <div className="title">
-                            <span className="up">顶</span>
-                            <span className="good">精</span>
-                            <span className="text">开源项目介绍 - 聊天机器人对话引擎之SuperScript</span>
-                        </div>
-                        <Brief>
-                            <span className="replycount">86<i className="iconfont">&#xe6cf;</i></span>
-                            <span className="viewcount">1325<i className="iconfont">&#xe6bd;</i></span>
-                            <span className="time">20天前</span>
-                        </Brief>
-                    </Item>
+                     {
+                         topics.map((topic,index)=>
+                         <Item
+                            multipleLine
+                            thumb={topic.author.avatar_url}
+                            onClick={() => {}}
+                            platform="android"
+                         >
+                            <div className="title">
+                                {topic.top===true?<span className="up">顶</span>:""}
+                                {topic.good===true?<span className="good">精</span>:""}
+                                <span className="text">{topic.title}</span>
+                            </div>
+                            <Brief>
+                                <span className="replycount">{topic.reply_count}<i className="iconfont">&#xe6cf;</i></span>
+                                <span className="viewcount">{topic.visit_count}<i className="iconfont">&#xe6bd;</i></span>
+                                <span className="time">{getTime(topic.create_at)}</span>
+                            </Brief>
+                        </Item>
+                     )}                    
                  </List>
-                 <div className="loading">
-                    <ActivityIndicator text="加载中..."/>
-                </div>
             </div>
         );
     }

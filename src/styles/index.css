@@ -33,9 +33,14 @@ a:hover,a:link,a:visited,a:active{
 	text-decoration: none;
 }
 
-.fade-in{
-	animation: fadeIn 0.5s ease-out;
+.loading{
+    padding-left: 40%;
+    margin: 0.5rem 0;
 }
+.am-tabs-content .am-tabs-tabpane{
+    overflow: inherit !important;
+}
+
 
 @keyframes fadeIn{
     0%{opacity:0;}

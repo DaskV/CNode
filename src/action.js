@@ -25,7 +25,7 @@ function receive_topics(tab,topics,page,limit){
     }
 }
 
-function select_tab(tab){
+export function select_tab(tab){
     return{
         type:SELECT_TAB,
         tab
@@ -37,7 +37,7 @@ export function fetch_topics(tab,page=1,limit=20){
     return function(dispatch){
          dispatch(request_topics(tab))
          fetch(`https://cnodejs.org/api/v1/topics?tab=${tab}&page=${page}&limit=${limit}`)
-         .then(res=>res.json)
+         .then(res=>res.json())
          .then(json=>dispatch(receive_topics(tab,json.data,page,limit)));
     }
 }
