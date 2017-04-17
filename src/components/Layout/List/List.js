@@ -28,7 +28,7 @@ class ListArticle extends Component {
                             <Brief>
                                 <span className="replycount">{topic.reply_count}<i className="iconfont">&#xe6cf;</i></span>
                                 <span className="viewcount">{topic.visit_count}<i className="iconfont">&#xe6bd;</i></span>
-                                <span className="time">{getTime(topic.create_at)}</span>
+                                <span className="time">{getTime(topic.last_reply_at)}</span>
                             </Brief>
                         </Item>
                      )}                    
@@ -38,7 +38,7 @@ class ListArticle extends Component {
     }
 }
 
-List.propTypes = {
+ListArticle.propTypes = {
 
 };
 

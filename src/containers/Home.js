@@ -4,7 +4,7 @@ import {ActivityIndicator} from 'antd-mobile'
 import {fetch_topics,select_tab} from '../action'
 import Header from '../components/Layout/Header/Header'
 import ListArticle from '../components/Layout/List/List'
-
+import getSize from '../utils/getSize'
 class Home extends Component {
     constructor(props){
         super(props);
@@ -12,8 +12,14 @@ class Home extends Component {
     }
     handleClick=(tab)=>{
         const {selectTab,dispatch}=this.props;
-        dispatch(select_tab(tab))  //更新props
-        
+        dispatch(select_tab(tab))  //更新props      
+    }
+    loadMore=()=>{
+        const {selectTab,page,isFetching,dispatch} = this.props;
+        let newpage =page;
+        if(!isFetching){
+            dispatch(fetch_topics(selectTab,++newpage));
+        }
     }
     tabs = [
         {
@@ -35,15 +41,24 @@ class Home extends Component {
     ]
 
      componentWillReceiveProps(newProps) {    //有props更新的化会触发该生命周期函数
-         const {topics,isFetching,selectTab,dispatch}=this.props;
-         console.log(selectTab);
+         const {topics,isFetching,selectTab,dispatch}=newProps;
          if(!isFetching && topics.length===0){
              dispatch(fetch_topics(selectTab));
          }
      }
     componentDidMount() {
         const {selectTab, dispatch} = this.props;
+
+        //第一次加载数据
         dispatch(fetch_topics(selectTab));
+
+        //滚动加载数据
+        window.onscroll=()=>{
+            let {windowH,contentH,scrollT}=getSize();
+            if(windowH+scrollT+100>contentH){              
+                this.loadMore();
+            }
+        }
 
     }
     render() {
@@ -68,12 +83,12 @@ Home.propTypes = {};
 
 function mapStateToProps(state) {
     const {selectTab, tabData} = state
-    console.log(selectTab);
     const {isFetching, page, topics} = tabData[selectTab] || {    //从多层级的state里把数据拿出来,并且没有异步拿到数据时要初始化
         isFetching: false,
         page: 0,
         topics: []
     }
+  
     return {selectTab, isFetching, page, topics};
 
 }
