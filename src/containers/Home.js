@@ -5,6 +5,7 @@ import {fetch_topics,select_tab} from '../action'
 import Header from '../components/Layout/Header/Header'
 import ListArticle from '../components/Layout/List/List'
 import getSize from '../utils/getSize'
+import BacktoTop from '../components/Layout/BacktoTop'
 class Home extends Component {
     constructor(props){
         super(props);
@@ -68,18 +69,21 @@ class Home extends Component {
                 <Header filter={selectTab} tabs={this.tabs}  OnhandleTabClick={this.handleClick}>
                     {this
                         .tabs
-                        .map((tab, index) => tab.filter === selectTab &&< div style = {{opacity:(!isFetching || page>=1) ? 1 : 0}} > <ListArticle topics={topics}/> </div>
+                        .map((tab, index) => tab.filter === selectTab &&< div key={index} style = {{opacity:(!isFetching || page>=1) ? 1 : 0}} > <ListArticle topics={topics}/> </div>
                                                                               
                         )}
 
                 </Header>
                 <ActivityIndicator className="loading" text="加载中..."> </ActivityIndicator>
+                <BacktoTop/>
             </div>
         );
     }
 }
 
-Home.propTypes = {};
+Home.propTypes = {
+    topics:PropTypes.array.isRequired
+};
 
 function mapStateToProps(state) {
     const {selectTab, tabData} = state

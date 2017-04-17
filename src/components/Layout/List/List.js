@@ -19,8 +19,9 @@ class ListArticle extends Component {
                             thumb={topic.author.avatar_url}
                             onClick={() => {}}
                             platform="android"
+                            key={index}
                          >
-                            <div className="title">
+                            <div className="title" Id={topics.id}>
                                 {topic.top===true?<span className="up">顶</span>:""}
                                 {topic.good===true?<span className="good">精</span>:""}
                                 <span className="text">{topic.title}</span>
@@ -39,7 +40,7 @@ class ListArticle extends Component {
 }
 
 ListArticle.propTypes = {
-
+    topics:PropTypes.array.isRequired
 };
 
 export default ListArticle;

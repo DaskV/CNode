@@ -21,8 +21,8 @@ function tabItemData(state = {
                 isFetching: true
             }
         case RECEIVE_TOPICS:
-            if (state.page < action.page) {
-                let topics = state.topics;
+            if (state.page < action.page) {     //前后两次state对比合并
+                let topics = state.topics;          
                 action.topics = topics.concat(action.topics);
             }
             return {

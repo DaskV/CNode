@@ -7,10 +7,10 @@ const TabPane = Tabs.TabPane;
 
 class Header extends Component {
 
-    callback=(key)=>{
-       this.props.OnhandleTabClick(this.props.tabs[key].filter);
-    }
-    
+     callback=(key)=>{
+        this.props.OnhandleTabClick(this.props.tabs[key].filter);
+     }
+
     render() {
         
         function ActiveKey(filter){
@@ -34,14 +34,13 @@ class Header extends Component {
                     <div className="rightcontent">
                         <i className="iconfont remind">&#xe713;</i>
                         <Badge text={'0'} className="badge" />
-                    </div>]}
-                 
+                    </div>]}               
                     ><span className="title">NodeJS-CN论坛</span>
                </NavBar>
-               <Tabs defaultActiveKey={ActiveKey(this.props.filter)} onChange={this.callback} onTabClick={this.handleTabClick}  className="tab">
+               {/*因为hammerJs swipe动画切换会有bug，目前没有找到解决办法,暂时设置animated=false */}
+               <Tabs defaultActiveKey={ActiveKey(this.props.filter)} onChange={this.callback} onTabClick={this.handleTabClick}  className="tab" animated={false} /*hammerOptions={new Hammer.Swipe({event:"swipedown"})}*/ >
                     {                       
-                        this.props.tabs.map((tab,i)=>
-                            
+                        this.props.tabs.map((tab,i)=>                        
                              <TabPane tab={tab.title} key={i}>
                                  {this.props.children}
                             </TabPane>
