@@ -33,7 +33,7 @@ class Header extends Component {
                     rightContent={[
                     <div className="rightcontent">
                         <i className="iconfont remind">&#xe713;</i>
-                        <Badge text={'0'} className="badge" />
+                        <Badge text={this.props.unreadcount} className="badge" style={{opacity:this.props.isshow==true ? 1 : 0}} />
                     </div>]}               
                     ><span className="title">NodeJS-CN论坛</span>
                </NavBar>

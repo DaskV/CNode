@@ -5,6 +5,11 @@ export const  REQUEST_TOPICS='REQUEST_TOPICS';
 export const  RECEIVE_TOPICS='RECEIVE_TOPICS';
 export const  SELECT_TAB='SELECT_TAB';
 
+//Login type
+export const LOGIN_SUCCESS='LOGIN_SUCCESS';
+export const LOGIN_FAILED='LOGIN_FAILED';
+export const UNREAD_COUNT='UNREAD_COUNT';
+
 
 // Layout action creater
 
@@ -36,8 +41,64 @@ export function select_tab(tab){
 export function fetch_topics(tab,page=1,limit=20){
     return function(dispatch){
          dispatch(request_topics(tab))
-         fetch(`https://cnodejs.org/api/v1/topics?tab=${tab}&page=${page}&limit=${limit}`)
+         fetch(`/api/v1/topics?tab=${tab}&page=${page}&limit=${limit}`)
          .then(res=>res.json())
          .then(json=>dispatch(receive_topics(tab,json.data,page,limit)));
+    }
+}
+
+
+//App action create
+
+export function fetch_accessToken(accessToken,loginName){
+    return function(dispatch){
+        fetch('/api/v1/accesstoken',{
+            method:'POST',
+            headers:{
+                "Content-type":"application/x-www-form-urlencoded"
+            },
+            body:`accesstoken=${accessToken}`
+        }).then(res=>res.json())
+          .then(json=>{
+              if(json.success){
+                    dispatch(login_success(json.loginname,json.id,accessToken))
+              }
+              else{
+                    dispatch(login_failed(json.error_msg))
+              }
+          })
+    }
+}
+
+function login_success(accessToken,loginName,loginId){
+    return {
+        type:LOGIN_SUCCESS,
+        loginName,
+        loginId,
+        accessToken
+    }  
+}
+
+function login_failed(issue){
+    return{
+        type:LOGIN_FAILED,
+        issue
+    }
+}
+
+export function fetch_unreadcount(accessToken){
+    return function(dispatch){
+        fetch(`api/v1/message/count?accesstoken=${accessToken}`)
+            .then(res=>res.json())
+            .then(json=>{
+                dispatch(unread_count(json.data))
+            })
+    }
+}
+
+function  unread_count(count){
+    return{
+        type:UNREAD_COUNT,
+        count
     }
 }

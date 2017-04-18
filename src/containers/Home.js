@@ -13,7 +13,7 @@ class Home extends Component {
     }
     handleClick=(tab)=>{
         const {selectTab,dispatch}=this.props;
-        dispatch(select_tab(tab))  //更新props      
+        dispatch(select_tab(tab))  //更新props[select_tab]      
     }
     loadMore=()=>{
         const {selectTab,page,isFetching,dispatch} = this.props;
@@ -63,10 +63,10 @@ class Home extends Component {
 
     }
     render() {
-        const {selectTab, isFetching, topics, page} = this.props;
+        const {selectTab, isFetching, topics, page,count,show} = this.props;
         return (
             <div>
-                <Header filter={selectTab} tabs={this.tabs}  OnhandleTabClick={this.handleClick}>
+                <Header filter={selectTab} tabs={this.tabs} unreadcount={count} isshow={show}  OnhandleTabClick={this.handleClick}>
                     {this
                         .tabs
                         .map((tab, index) => tab.filter === selectTab &&< div key={index} style = {{opacity:(!isFetching || page>=1) ? 1 : 0}} > <ListArticle topics={topics}/> </div>
@@ -86,14 +86,15 @@ Home.propTypes = {
 };
 
 function mapStateToProps(state) {
-    const {selectTab, tabData} = state
+    const {selectTab, tabData} = state.home
+    const {count,show}=state.message
     const {isFetching, page, topics} = tabData[selectTab] || {    //从多层级的state里把数据拿出来,并且没有异步拿到数据时要初始化
         isFetching: false,
         page: 0,
         topics: []
     }
   
-    return {selectTab, isFetching, page, topics};
+    return {selectTab, isFetching, page, topics,count,show};
 
 }
 
