@@ -1,12 +1,12 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import {fetch_accessToken,fetch_unreadcount} from '../action'
+import {fetch_accessToken,fetch_unreadcount,fetch_personalinfo} from '../action'
 class App extends Component {
  loginAction=(accessToken,loginName)=>{
         const {dispatch}= this.props;
         dispatch(fetch_accessToken(accessToken,loginName))     
         dispatch(fetch_unreadcount(accessToken))
-
+        dispatch(fetch_personalinfo(loginName))
  }
     componentWillMount() {
        
@@ -41,7 +41,8 @@ App.propTypes = {
 function mapStateToProps(state){
     const login =state.login;
     const message=state.message;
-    return {login,message};
+    const personinfo= state.personinfo;
+    return {login,message,personinfo};
 }
 
 export default connect(mapStateToProps)(App)

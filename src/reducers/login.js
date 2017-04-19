@@ -7,9 +7,7 @@ function login(state = {
         case LOGIN_SUCCESS:
             return{
                 ...state,
-                success:true,
-                loginName:action.loginName,
-                loginId:action.loginId,
+                success:true,              
                 accessToken:action.accessToken
             }
         case LOGIN_FAILED:

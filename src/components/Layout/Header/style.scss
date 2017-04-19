@@ -25,3 +25,46 @@
         }
     }
 }
+.main{
+    position: relative;
+}
+.show{
+   z-index: 1;
+   
+}
+
+.out{
+    width: 12rem;
+    background: #fff;
+    height: 100%;
+    .sidebar_head{
+        width: 100%;
+        padding: 3rem 0;
+        background: #5fe45f;
+        text-align: center;
+        color: #fff;
+        p{
+            margin: 1rem 0;
+        }
+        img{
+            width: 3rem;
+            height: 3rem;
+            overflow: hidden;
+            border-radius: 3rem;
+            border:1px solid #ddd;
+        }
+        .loginName{
+            color: #108ee9;
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+        }
+        a{
+            width: 50%;
+        }
+    }
+    .iconfont{
+        font-size: 0.8rem;
+        color: #108ee9;
+        margin-right: 0.5rem;
+    }
+}

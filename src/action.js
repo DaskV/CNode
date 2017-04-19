@@ -10,6 +10,9 @@ export const LOGIN_SUCCESS='LOGIN_SUCCESS';
 export const LOGIN_FAILED='LOGIN_FAILED';
 export const UNREAD_COUNT='UNREAD_COUNT';
 
+//personalInfo type
+export const GET_PERSONINFO='GET_PERSONINFO';
+
 
 // Layout action creater
 
@@ -61,7 +64,7 @@ export function fetch_accessToken(accessToken,loginName){
         }).then(res=>res.json())
           .then(json=>{
               if(json.success){
-                    dispatch(login_success(json.loginname,json.id,accessToken))
+                    dispatch(login_success(accessToken))
               }
               else{
                     dispatch(login_failed(json.error_msg))
@@ -70,11 +73,9 @@ export function fetch_accessToken(accessToken,loginName){
     }
 }
 
-function login_success(accessToken,loginName,loginId){
+function login_success(accessToken){
     return {
-        type:LOGIN_SUCCESS,
-        loginName,
-        loginId,
+        type:LOGIN_SUCCESS,       
         accessToken
     }  
 }
@@ -100,5 +101,23 @@ function  unread_count(count){
     return{
         type:UNREAD_COUNT,
         count
+    }
+}
+
+
+export function fetch_personalinfo(loginName){
+        return function(dispatch){
+            fetch(`api/v1/user/${loginName}`)
+                .then(res=>res.json())
+                .then(json=>{
+                    dispatch(get_personinfo(json.data))
+                })
+        }
+}
+
+function get_personinfo(data){
+    return{
+        type:GET_PERSONINFO,
+        data
     }
 }

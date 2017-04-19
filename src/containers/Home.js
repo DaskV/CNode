@@ -63,10 +63,12 @@ class Home extends Component {
 
     }
     render() {
-        const {selectTab, isFetching, topics, page,count,show} = this.props;
+        const {selectTab, isFetching, topics, page,count,show,avatar_url,create_at,githubUsername,loginname,score} = this.props;
+        const {...personinfo}={avatar_url,create_at,githubUsername,loginname,score};
+
         return (
             <div>
-                <Header filter={selectTab} tabs={this.tabs} unreadcount={count} isshow={show}  OnhandleTabClick={this.handleClick}>
+                <Header filter={selectTab} tabs={this.tabs} unreadcount={count} isshow={show}  OnhandleTabClick={this.handleClick} personinfo={personinfo} >
                     {this
                         .tabs
                         .map((tab, index) => tab.filter === selectTab &&< div key={index} style = {{opacity:(!isFetching || page>=1) ? 1 : 0}} > <ListArticle topics={topics}/> </div>
@@ -88,13 +90,15 @@ Home.propTypes = {
 function mapStateToProps(state) {
     const {selectTab, tabData} = state.home
     const {count,show}=state.message
+    const {avatar_url,create_at,githubUsername,loginname,score}=state.personinfo;
+
     const {isFetching, page, topics} = tabData[selectTab] || {    //从多层级的state里把数据拿出来,并且没有异步拿到数据时要初始化
         isFetching: false,
         page: 0,
         topics: []
     }
   
-    return {selectTab, isFetching, page, topics,count,show};
+    return {selectTab, isFetching, page, topics,count,show,avatar_url,create_at,githubUsername,loginname,score};
 
 }
 
