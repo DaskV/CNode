@@ -8,11 +8,12 @@ export const  SELECT_TAB='SELECT_TAB';
 //Login type
 export const LOGIN_SUCCESS='LOGIN_SUCCESS';
 export const LOGIN_FAILED='LOGIN_FAILED';
-export const UNREAD_COUNT='UNREAD_COUNT';
+export const LOGOUT='LOGOUT';
 
 //personalInfo type
 export const GET_PERSONINFO='GET_PERSONINFO';
-
+export const GET_OTHER_PERSONINFO='GET_OTHER_PERSONINFO';
+export const UNREAD_COUNT='UNREAD_COUNT';
 
 // Layout action creater
 
@@ -53,7 +54,7 @@ export function fetch_topics(tab,page=1,limit=20){
 
 //App action create
 
-export function fetch_accessToken(accessToken,loginName){
+export function fetch_accessToken(accessToken){
     return function(dispatch){
         fetch('/api/v1/accesstoken',{
             method:'POST',
@@ -87,6 +88,12 @@ function login_failed(issue){
     }
 }
 
+export function logout(){
+    return{
+        type:LOGOUT
+    }
+}
+
 export function fetch_unreadcount(accessToken){
     return function(dispatch){
         fetch(`api/v1/message/count?accesstoken=${accessToken}`)
@@ -105,12 +112,17 @@ function  unread_count(count){
 }
 
 
-export function fetch_personalinfo(loginName){
+export function fetch_personalinfo(loginName,Isother=false){
         return function(dispatch){
             fetch(`api/v1/user/${loginName}`)
                 .then(res=>res.json())
                 .then(json=>{
-                    dispatch(get_personinfo(json.data))
+                    if(Isother===false){
+                        dispatch(get_personinfo(json.data))
+                    }
+                    else{   
+                        dispatch(get_other_personinfo(json.data))
+                    }   
                 })
         }
 }
@@ -118,6 +130,13 @@ export function fetch_personalinfo(loginName){
 function get_personinfo(data){
     return{
         type:GET_PERSONINFO,
+        data
+    }
+}
+
+function get_other_personinfo(data){
+    return{
+        type:GET_OTHER_PERSONINFO,
         data
     }
 }

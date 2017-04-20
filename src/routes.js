@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {Route, IndexRoute} from 'react-router'
 import App from './containers/App'
 import Home from './containers/Home'
-import LoginField from './components/Login/Login'
+import LoginField from './containers/Login'
 
 const routes = (
     <Route path='/' component={App} >

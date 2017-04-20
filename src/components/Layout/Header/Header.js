@@ -1,12 +1,14 @@
 import React, {Component, PropTypes} from 'react'
 import {Link} from 'react-router'
-import {NavBar, Icon, Badge,Tabs,Drawer,Button,List} from 'antd-mobile'
+import {NavBar, Icon, Badge,Tabs,Drawer,Button,List,Modal} from 'antd-mobile'
 import getTime from '../../../utils/getTime'
 import './style.scss';
-
+import avatar from '../../../styles/image/avatar.png'
 
 const TabPane = Tabs.TabPane;
 const Item = List.Item;
+const alert =Modal.alert;
+
 class Header extends Component {
      state={
         open:false,
@@ -18,6 +20,16 @@ class Header extends Component {
      onOpenChange =()=> {
         this.setState({ open: !this.state.open });
     }
+    handleLogout=()=>{
+        alert('注销','确定注销吗?',[
+            {text:'取消',onPress:()=>console.log('cancel')},
+            {text:'确定',onPress:()=>{
+                this.props.Logout();   //注销login-state
+                console.log('ok')
+            }}
+        ])
+    }
+
      render() {
         
         function ActiveKey(filter){
@@ -29,18 +41,31 @@ class Header extends Component {
                 case "job":return "4";
             }
         }
+
+        
         const drawerContent =(
             <div className="out">
-                <div className="sidebar_head">
-                    <img src={this.props.personinfo.avatar_url} className="avatar_url" />
-                    <p className="loginName">{this.props.personinfo.loginname}</p>
-                    <p>积分:{this.props.personinfo.score}</p>
-                    <p>注册时间:{getTime(this.props.personinfo.create_at)}</p>
-                    <p>github账号:{this.props.personinfo.githubUsername}</p>
-                    <div className="logout">
-                         <Button type="primary" inline>注销</Button>
+                {   this.props.personinfo.success &&
+                    <div className="sidebar_head">
+                        <img src={this.props.personinfo.avatar_url} className="avatar_url" />
+                        <p className="loginName">{this.props.personinfo.loginname}</p>
+                        <p>积分:{this.props.personinfo.score}</p>
+                        <p>注册时间:{getTime(this.props.personinfo.create_at)}</p>
+                        <p>github账号:{this.props.personinfo.githubUsername}</p>
+                        <div className="logout">
+                            <Button type="primary" inline onClick={this.handleLogout}>注销</Button>
+                        </div>
                     </div>
-                </div>
+                }
+                {   !this.props.personinfo.success&&
+                    <div className="sidebar_head">
+                        <Link to='/login'>
+                            <img src={avatar} className="avatar_url" />
+                        </Link>                       
+                        <p className="loginName">点击头像登录</p>
+                    </div>
+                }
+                
                 <List>
                     <Item><i className="iconfont">&#xe732;</i>个人主页</Item>
                     <Item><i className="iconfont">&#xe69f;</i>消息中心</Item>
@@ -77,7 +102,7 @@ class Header extends Component {
                         ><span className="title">NodeJS-CN论坛</span>
                     </NavBar>
                     {/*因为hammerJs swipe动画切换会有bug，目前没有找到解决办法,暂时设置animated=false */}
-                    <Tabs defaultActiveKey={ActiveKey(this.props.filter)} onChange={this.callback} onTabClick={this.handleTabClick}  className="tab" animated={false} /*hammerOptions={new Hammer.Swipe({event:"swipedown"})}*/ >
+                    <Tabs defaultActiveKey={ActiveKey(this.props.filter)} onChange={this.callback}  className="tab" animated={false} /*hammerOptions={new Hammer.Swipe({event:"swipedown"})}*/ >
                         {                       
                             this.props.tabs.map((tab,i)=>                        
                                 <TabPane tab={tab.title} key={i}>

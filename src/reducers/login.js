@@ -1,4 +1,4 @@
-import {LOGIN_SUCCESS, LOGIN_FAILED} from '../action'
+import {LOGIN_SUCCESS, LOGIN_FAILED,LOGOUT} from '../action'
 
 function login(state = {
     success: false
@@ -15,6 +15,10 @@ function login(state = {
                 ...state,
                 success:false,
                 issue:action.issue
+            }
+        case LOGOUT:
+            return{
+                success:false
             }
         default:
             return state

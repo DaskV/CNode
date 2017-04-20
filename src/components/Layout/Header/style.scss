@@ -2,12 +2,6 @@
     height: 2.5rem;
     background: #108ee9;
     color: #f0f0f0;
-    box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;
-    // position: fixed;
-    // top: 0;
-    // left: 0;
-    // z-index: 10000;
-    // width: 100%;
     .title{
         color: #f0f0f0 !important;
         font-size: 0.9rem;
@@ -51,7 +45,7 @@
             height: 3rem;
             overflow: hidden;
             border-radius: 3rem;
-            border:1px solid #ddd;
+            border:4px solid #fff;
         }
         .loginName{
             color: #108ee9;
@@ -67,4 +61,10 @@
         color: #108ee9;
         margin-right: 0.5rem;
     }
+}
+.am-modal{
+    width: 60% !important;
+}
+.am-tabs-ink-bar{
+    // transform: inherit !important;
 }

@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import {connect} from 'react-redux'
 import {ActivityIndicator} from 'antd-mobile'
-import {fetch_topics,select_tab} from '../action'
+import {fetch_topics,select_tab,logout} from '../action'
 import Header from '../components/Layout/Header/Header'
 import ListArticle from '../components/Layout/List/List'
 import getSize from '../utils/getSize'
@@ -15,6 +15,11 @@ class Home extends Component {
         const {selectTab,dispatch}=this.props;
         dispatch(select_tab(tab))  //更新props[select_tab]      
     }
+    handleLogout=()=>{
+        const {dispatch}=this.props;
+        dispatch(logout())
+    }
+
     loadMore=()=>{
         const {selectTab,page,isFetching,dispatch} = this.props;
         let newpage =page;
@@ -63,12 +68,12 @@ class Home extends Component {
 
     }
     render() {
-        const {selectTab, isFetching, topics, page,count,show,avatar_url,create_at,githubUsername,loginname,score} = this.props;
-        const {...personinfo}={avatar_url,create_at,githubUsername,loginname,score};
+        const {selectTab, isFetching, topics, page,count,show,avatar_url,create_at,githubUsername,loginname,score,success} = this.props;
+        const {...personinfo}={avatar_url,create_at,githubUsername,loginname,score,success};
 
         return (
             <div>
-                <Header filter={selectTab} tabs={this.tabs} unreadcount={count} isshow={show}  OnhandleTabClick={this.handleClick} personinfo={personinfo} >
+                <Header filter={selectTab} tabs={this.tabs} unreadcount={count} isshow={show}  OnhandleTabClick={this.handleClick}  Logout={this.handleLogout} personinfo={personinfo} >
                     {this
                         .tabs
                         .map((tab, index) => tab.filter === selectTab &&< div key={index} style = {{opacity:(!isFetching || page>=1) ? 1 : 0}} > <ListArticle topics={topics}/> </div>
@@ -91,14 +96,14 @@ function mapStateToProps(state) {
     const {selectTab, tabData} = state.home
     const {count,show}=state.message
     const {avatar_url,create_at,githubUsername,loginname,score}=state.personinfo;
-
+    const {success} =state.login;
     const {isFetching, page, topics} = tabData[selectTab] || {    //从多层级的state里把数据拿出来,并且没有异步拿到数据时要初始化
         isFetching: false,
         page: 0,
         topics: []
     }
   
-    return {selectTab, isFetching, page, topics,count,show,avatar_url,create_at,githubUsername,loginname,score};
+    return {selectTab, isFetching, page, topics,count,show,avatar_url,create_at,githubUsername,loginname,score,success};
 
 }
 

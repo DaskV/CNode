@@ -43,6 +43,9 @@ module.exports = {
         test: /\.scss$/,
         loader: 'style-loader!css-loader!postcss-loader!sass-loader'
       }, {
+        test: /\.(png|jpg)$/,
+        loader: 'url-loader?limit=8192'
+      }, {
         test: /\.(svg)$/i,
         loader: 'svg-sprite',
         include: svgDirs, // 把 svgDirs 路径下的所有 svg 文件交给 svg-sprite-loader 插件处理
