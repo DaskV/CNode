@@ -15,6 +15,8 @@ export const GET_PERSONINFO='GET_PERSONINFO';
 export const GET_OTHER_PERSONINFO='GET_OTHER_PERSONINFO';
 export const UNREAD_COUNT='UNREAD_COUNT';
 export const GET_PEROSON_TOPIC_COLLECT='GET_PEROSON_TOPIC_COLLECT';
+export const GET_MESSAGE='GET_MESSAGE';
+
 
 // Layout action creater
 
@@ -155,6 +157,23 @@ export function fetch_person_topic_collect(loginName){
 function get_person_topic_collect(data){
     return{
         type:GET_PEROSON_TOPIC_COLLECT,
+        data
+    }
+}
+
+export function fetch_message(accessToken){
+    return function(dispatch){
+        fetch(`api/v1/messages?accesstoken=${accessToken}`)
+            .then(res=>res.json())
+            .then(json=>{
+                dispatch(get_message(json.data))
+            })
+    }
+}
+
+function get_message(data){
+    return{
+        type:GET_MESSAGE,
         data
     }
 }

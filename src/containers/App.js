@@ -1,11 +1,11 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import {fetch_accessToken,fetch_unreadcount,fetch_personalinfo} from '../action'
+import {fetch_accessToken,fetch_message,fetch_personalinfo} from '../action'
 class App extends Component {
  loginAction=(accessToken,loginName)=>{
         const {dispatch}= this.props;
         dispatch(fetch_accessToken(accessToken))     
-        dispatch(fetch_unreadcount(accessToken))
+        dispatch(fetch_message(accessToken))
         dispatch(fetch_personalinfo(loginName))
  }
     componentWillMount() {

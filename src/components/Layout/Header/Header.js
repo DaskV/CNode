@@ -88,7 +88,6 @@ class Header extends Component {
         else{
             document.querySelector("body").style.overflow='auto';
         }
-
         return (       
             <div>
                 <div className={drawerProps.open===true?"main":"main show"}>

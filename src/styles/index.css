@@ -46,3 +46,17 @@ a:hover,a:link,a:visited,a:active{
     0%{opacity:0;}
     100%{opacity:1;}
 }
+
+.fadeIn{
+    animation: fadeIn 1s ease-out;
+    transform: translate(0);
+}
+
+@keyframes fade-In{
+     0%{
+         opacity: 0
+     }
+     100%{
+         opacity: 1
+     }
+}
