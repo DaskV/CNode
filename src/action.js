@@ -14,6 +14,7 @@ export const LOGOUT='LOGOUT';
 export const GET_PERSONINFO='GET_PERSONINFO';
 export const GET_OTHER_PERSONINFO='GET_OTHER_PERSONINFO';
 export const UNREAD_COUNT='UNREAD_COUNT';
+export const GET_PEROSON_TOPIC_COLLECT='GET_PEROSON_TOPIC_COLLECT';
 
 // Layout action creater
 
@@ -137,6 +138,23 @@ function get_personinfo(data){
 function get_other_personinfo(data){
     return{
         type:GET_OTHER_PERSONINFO,
+        data
+    }
+}
+
+export function fetch_person_topic_collect(loginName){
+    return function(dispatch){
+        fetch(`api/v1/topic_collect/${loginName}`)
+            .then(res=>res.json())
+            .then(json=>{
+                dispatch(get_person_topic_collect(json.data))
+            })
+    }
+}
+
+function get_person_topic_collect(data){
+    return{
+        type:GET_PEROSON_TOPIC_COLLECT,
         data
     }
 }

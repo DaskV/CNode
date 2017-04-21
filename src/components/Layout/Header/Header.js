@@ -29,7 +29,6 @@ class Header extends Component {
             }}
         ])
     }
-
      render() {
         
         function ActiveKey(filter){
@@ -67,7 +66,11 @@ class Header extends Component {
                 }
                 
                 <List>
-                    <Item><i className="iconfont">&#xe732;</i>个人主页</Item>
+                    <Link to={`/personInfo/${this.props.personinfo.loginname}`} onClick={()=>document.querySelector("body").style.overflow='auto'} > 
+                        <Item>
+                            <i className="iconfont">&#xe732;</i>个人主页               
+                        </Item>
+                    </Link>    
                     <Item><i className="iconfont">&#xe69f;</i>消息中心</Item>
                 </List>
             </div>

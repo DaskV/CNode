@@ -70,7 +70,6 @@ class Home extends Component {
     render() {
         const {selectTab, isFetching, topics, page,count,show,avatar_url,create_at,githubUsername,loginname,score,success} = this.props;
         const {...personinfo}={avatar_url,create_at,githubUsername,loginname,score,success};
-
         return (
             <div>
                 <Header filter={selectTab} tabs={this.tabs} unreadcount={count} isshow={show}  OnhandleTabClick={this.handleClick}  Logout={this.handleLogout} personinfo={personinfo} >

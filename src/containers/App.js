@@ -17,8 +17,10 @@ class App extends Component {
             this.loginAction(accessToken,loginName);
         }
         else{
-            const accessToken = '8e382e01-997d-4138-bf39-2c574de7f0e6'
-            const loginName = 'DaskV'
+            // const accessToken = '8e382e01-997d-4138-bf39-2c574de7f0e6'
+            // const loginName = 'DaskV'
+               const accessToken = 'e6bdc61e-e6ec-4f75-b8ee-1d4b34309285'
+               const loginName = 'Mwangzhi'
             this.loginAction(accessToken,loginName);
         }
 
