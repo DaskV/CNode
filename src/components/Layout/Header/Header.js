@@ -66,12 +66,16 @@ class Header extends Component {
                 }
                 
                 <List>
-                    <Link to={`/personInfo/${this.props.personinfo.loginname}`} onClick={()=>document.querySelector("body").style.overflow='auto'} > 
+                    <Link to={`/user/${this.props.personinfo.loginname}`} onClick={()=>document.querySelector("body").style.overflow='auto'} > 
                         <Item>
                             <i className="iconfont">&#xe732;</i>个人主页               
                         </Item>
                     </Link>    
-                    <Item><i className="iconfont">&#xe69f;</i>消息中心</Item>
+                    <Link to={`/message`} onClick={()=>document.querySelector("body").style.overflow='auto'} > 
+                        <Item>
+                            <i className="iconfont">&#xe69f;</i>消息中心
+                        </Item>
+                    </Link>    
                 </List>
             </div>
         )
@@ -97,17 +101,20 @@ class Header extends Component {
                         mode="light"
                         onLeftClick={this.onOpenChange}
                         rightContent={[
-                        <div className="rightcontent">
-                            <i className="iconfont remind">&#xe713;</i>
-                            <Badge text={this.props.unreadcount} className="badge" style={{opacity:this.props.isshow==true ? 1 : 0}} />
-                        </div>]}               
+                            <Link to='/message'>                                
+                                <div className="rightcontent">
+                                    <i className="iconfont remind">&#xe713;</i>
+                                    <Badge text={this.props.unreadcount} className="badge" style={{opacity:this.props.isshow==true ? 1 : 0}} />
+                                </div>
+                            </Link>
+                        ]}               
                         ><span className="title">NodeJS-CN论坛</span>
                     </NavBar>
-                    {/*因为hammerJs swipe动画切换会有bug，目前没有找到解决办法,暂时设置animated=false */}
-                    <Tabs defaultActiveKey={ActiveKey(this.props.filter)} onChange={this.callback}  className="tab" animated={false} /*hammerOptions={new Hammer.Swipe({event:"swipedown"})}*/ >
+                    {/*因为hammerJs swipe动画切换会有bug，目前没有找到解决办法,暂时设置swipeable=false */}
+                    <Tabs defaultActiveKey={ActiveKey(this.props.filter)} onChange={this.callback}  className="tab" swipeable={false} /*hammerOptions={new Hammer.Swipe({event:"swipedown"})}*/ >
                         {                       
                             this.props.tabs.map((tab,i)=>                        
-                                <TabPane tab={tab.title} key={i}>
+                                <TabPane tab={tab.title} key={i} style={{overflow:"inherit"}}>
                                     {this.props.children}
                                 </TabPane>
                             )

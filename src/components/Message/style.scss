@@ -1,0 +1,35 @@
+.my-list{
+    img{
+        width: 1.8rem;
+        height: 1.8rem;
+        border-radius: 50px;
+        border: 1px solid #eee;
+        background-color: rgba(0, 0, 0, 0.2);
+    }
+    .small{
+        font-size: 0.62rem;
+        .from{
+            color: #909090;
+            display: inline-block;
+            width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .time{
+            color: #909090;
+        }
+    }
+    .content{
+        margin: 0.2rem 0;
+    }
+    .markdown-text{
+        img{
+            width: 2.5rem;
+            height: 2.5rem;
+        }
+    }
+}
+.am-tabs-content .am-tabs-tabpane{
+    overflow-y: auto;
+}

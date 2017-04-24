@@ -16,7 +16,7 @@ export const GET_OTHER_PERSONINFO='GET_OTHER_PERSONINFO';
 export const UNREAD_COUNT='UNREAD_COUNT';
 export const GET_PEROSON_TOPIC_COLLECT='GET_PEROSON_TOPIC_COLLECT';
 export const GET_MESSAGE='GET_MESSAGE';
-
+export const SELECT_MESSAGE='SELECT_MESSAGE';
 
 // Layout action creater
 
@@ -175,5 +175,12 @@ function get_message(data){
     return{
         type:GET_MESSAGE,
         data
+    }
+}
+
+export function select_message(tab){
+    return{
+        type:SELECT_MESSAGE,
+        tab
     }
 }

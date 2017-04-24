@@ -7,7 +7,7 @@ class PersonInfo extends Component {
     componentWillMount(){
         const { dispatch } =this.props;
         let userName = this.props.location.pathname;
-        userName=userName.split("personInfo/")[1];
+        userName=userName.split("user/")[1];
         dispatch(fetch_personalinfo(userName,true))
         dispatch(fetch_person_topic_collect(userName))
     }

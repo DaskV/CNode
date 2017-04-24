@@ -44,17 +44,19 @@ class Home extends Component {
         }
     ]
 
-     componentWillReceiveProps(newProps) {    //有props更新的化会触发该生命周期函数
+     componentWillReceiveProps(newProps) {    //有props更新的化会触发该生命周期函数=是state的字段有变化
          const {topics,isFetching,selectTab,dispatch}=newProps;
          if(!isFetching && topics.length===0){
-             dispatch(fetch_topics(selectTab));
+              dispatch(fetch_topics(selectTab));
          }
      }
     componentDidMount() {
-        const {selectTab, dispatch} = this.props;
+        const {selectTab, dispatch,isFetching,topics} = this.props;
 
         //第一次加载数据
-        dispatch(fetch_topics(selectTab));
+        if(!isFetching && topics.length===0){
+            dispatch(fetch_topics(selectTab));
+         }
 
         //滚动加载数据
         window.onscroll=()=>{
@@ -64,6 +66,12 @@ class Home extends Component {
             }
         }
 
+
+    }
+    componentWillUnmount(){
+      window.onscroll=()=>{
+          return
+      }
     }
     render() {
         const {selectTab, isFetching, topics, page,hasnot_read_messages,show,avatar_url,create_at,githubUsername,loginname,score,success} = this.props;

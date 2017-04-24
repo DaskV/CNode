@@ -1,4 +1,4 @@
-import {UNREAD_COUNT,GET_MESSAGE} from '../action'
+import {UNREAD_COUNT,GET_MESSAGE,SELECT_MESSAGE} from '../action'
 
 export function messagecount(state={
     count:0,
@@ -19,7 +19,8 @@ export function messagecount(state={
 export function message(state={
     has_read_messages:[],
     hasnot_read_messages:[],
-    show:false
+    show:false,
+    selected:"0"
 },action){
     switch(action.type){
         case GET_MESSAGE:
@@ -29,8 +30,14 @@ export function message(state={
                 hasnot_read_messages:action.data.hasnot_read_messages,
                 show:action.data.hasnot_read_messages.length>0?true:false
             }
+        case SELECT_MESSAGE:
+            return {
+                ...state,
+                selected:action.tab
+            }
         default:
             return state
     }
 }
+
 
