@@ -17,8 +17,14 @@ export const UNREAD_COUNT='UNREAD_COUNT';
 export const GET_PEROSON_TOPIC_COLLECT='GET_PEROSON_TOPIC_COLLECT';
 export const GET_MESSAGE='GET_MESSAGE';
 export const SELECT_MESSAGE='SELECT_MESSAGE';
+export const MARK_MESSAGE='MARK_MESSAGE';
+
+//Article type
+export const REQUEST_ARTICLE='REQUEST_ARTICLE';
+export const RECEIVE_ARTICLE='RECEIVE_ARTICLE';
 
 // Layout action creater
+
 
 function request_topics(tab){
     return{
@@ -182,5 +188,37 @@ export function select_message(tab){
     return{
         type:SELECT_MESSAGE,
         tab
+    }
+}
+
+export function fetch_mark_message(msgId,accessToken){
+    return function(dispatch){
+        fetch(`api/v1/message/mark_one/${msgId}`,{
+                method:'POST',
+                headers:{
+                    "Content-type":"application/x-www-form-urlencoded"
+                },
+                body:`accesstoken=${accessToken}`
+            })
+            .then(res=>res.json())
+            .then(json=>{
+                dispatch(fetch_message(accessToken)) 
+            })
+    }
+}
+
+//Article
+function request_article(articleId){
+    return{
+        type:REQUEST_ARTICLE,
+        articleId
+    }
+}
+
+function receive_article(articleId,details){
+    return{
+        type:RECEIVE_ARTICLE,
+        articleId,
+        details
     }
 }

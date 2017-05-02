@@ -1,11 +1,24 @@
 import React, { Component, PropTypes } from 'react'
+import {Link} from 'react-router'
 import './style.scss'
+import {scrolltoTop, swipeUp} from '../../utils/scrolltoTop';
 class BacktoTop extends Component {
+    componentDidMount() {
+        swipeUp()
+    }
     render() {
         return (
-            <div>
-                <i className="iconfont back" onClick={()=>{window.scrollTo(0,0)}}>&#xe619;</i>
-            </div>
+            <div>           
+                <div className="back animated fadeInUp"  onClick={()=>{scrolltoTop()}}>
+                    <i className="iconfont">&#xe619;</i>
+                </div>
+                <Link to="/">
+                    <div className="release">
+                        <i className="iconfont">&#xe6b9;</i>
+                    </div>
+                </Link>
+             </div>
+
         );
     }
 }

@@ -5,6 +5,7 @@ import store from './store'
 import {Provider} from 'react-redux'
 import {Router, Route, hashHistory} from 'react-router'
 import routes from './routes'
+import './styles/animate.css'
 import './styles/index.css'
 
 const injectTapEventPlugin = require("react-tap-event-plugin"); //react插件 处理 点击300毫秒延迟

@@ -108,7 +108,7 @@ class Header extends Component {
                                 </div>
                             </Link>
                         ]}               
-                        ><span className="title">NodeJS-CN论坛</span>
+                        ><span className="title">CNode社区</span>
                     </NavBar>
                     {/*因为hammerJs swipe动画切换会有bug，目前没有找到解决办法,暂时设置swipeable=false */}
                     <Tabs defaultActiveKey={ActiveKey(this.props.filter)} onChange={this.callback}  className="tab" swipeable={false} /*hammerOptions={new Hammer.Swipe({event:"swipedown"})}*/ >
