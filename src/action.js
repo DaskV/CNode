@@ -75,6 +75,8 @@ export function fetch_accessToken(accessToken){
           .then(json=>{
               if(json.success){
                     dispatch(login_success(accessToken))
+                    dispatch(fetch_personalinfo(json.loginname))
+                    dispatch(fetch_message(accessToken))
               }
               else{
                     dispatch(login_failed(json.error_msg))

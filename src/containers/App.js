@@ -10,20 +10,19 @@ class App extends Component {
  }
     componentWillMount() {
        
-        if(window.localStorage.getItem('accessToken')){
-            let Token = JSON.parse(window.localStorage.getItem('accessToken'));
+        if(window.localStorage.getItem('token')){
+            let Token = JSON.parse(window.localStorage.getItem('token'));
             const accessToken=Token.accessToken;
-            const loginName=Token.loginName;
-            this.loginAction(accessToken,loginName);
+            const loginname=Token.loginname;
+            this.loginAction(accessToken,loginname);
         }
         else{
-            // const accessToken = '8e382e01-997d-4138-bf39-2c574de7f0e6'
-            // const loginName = 'DaskV'
-               const accessToken = 'e6bdc61e-e6ec-4f75-b8ee-1d4b34309285'
-               const loginName = 'Mwangzhi'
-            this.loginAction(accessToken,loginName);
-        }
-
+               const  accessToken='e6bdc61e-e6ec-4f75-b8ee-1d4b34309285'; //'8e382e01-997d-4138-bf39-2c574de7f0e6'
+               const  loginname='Mwangzhi';                               //DaskV
+               const token={accessToken,loginname}         
+               window.localStorage.setItem('token',JSON.stringify(token));
+               this.loginAction(accessToken,loginname);
+           }
     }
     render() {
         return (
@@ -39,9 +38,7 @@ App.propTypes = {
 };
 
 function mapStateToProps(state){
-    const login =state.login;
-    const message=state.message;
-    const personinfo= state.personinfo;
+    const {login,message,personinfo} =state.login;
     return {login,message,personinfo};
 }
 

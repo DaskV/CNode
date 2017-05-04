@@ -4,7 +4,10 @@ import './style.scss'
 import {scrolltoTop, swipeUp} from '../../utils/scrolltoTop';
 class BacktoTop extends Component {
     componentDidMount() {
-        swipeUp()
+        swipeUp(true)
+    }
+    componentWillUnmount() {
+        swipeUp()     
     }
     render() {
         return (

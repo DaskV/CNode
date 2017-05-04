@@ -25,7 +25,7 @@ class Header extends Component {
             {text:'取消',onPress:()=>console.log('cancel')},
             {text:'确定',onPress:()=>{
                 this.props.Logout();   //注销login-state
-                console.log('ok')
+                localStorage.removeItem('token'); //清除本地存储
             }}
         ])
     }
@@ -33,11 +33,11 @@ class Header extends Component {
         
         function ActiveKey(filter){
             switch(filter){
-                case "all":return "0";
-                case "filter":return "1";
-                case "share":return "2";
-                case "ask":return "3";
-                case "job":return "4";
+                case "all":   return "0";
+                case "good":  return "1";
+                case "share": return "2";
+                case "ask":   return "3";
+                case "job":   return "4";
             }
         }
 

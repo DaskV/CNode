@@ -10,7 +10,7 @@ class Login extends Component {
     }
 
     handleSubmit = (accesstoken,isrem) => {
-        const {dispatch} = this.props;
+        const {dispatch,loginname} = this.props;
 
         this.setState({isremember:isrem})
 
@@ -19,16 +19,17 @@ class Login extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        const {accessToken,success, issue}=nextProps;      
+        const {accessToken,success, issue,loginname}=nextProps;      
         if(success===false){          
              alert(issue);
         }
         else{        
             if(this.state.isremember===true){        
-                let userInfo = {accessToken,success}
-                window.localStorage.setItem('userInfo',JSON.stringify(userInfo));
+                let token = {accessToken,loginname}
+                window.localStorage.setItem('token',JSON.stringify(token));
             }
           this.props.history.push('/');  //跳转'/'页面
+
 
         }
     }
@@ -45,7 +46,8 @@ class Login extends Component {
 
 function mapStateToProps(state) {
     const {accessToken, success, issue} = state.login
-    return {accessToken, success, issue}
+    const {loginname}=state.personinfo
+    return {accessToken, success, issue,loginname}
 }
 
 export default connect(mapStateToProps)(Login);

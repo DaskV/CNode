@@ -1,20 +1,25 @@
 import React, {Component} from 'react'
-import {Route, IndexRoute} from 'react-router'
+import {Route, IndexRoute,Redirect} from 'react-router'
 import App from './containers/App'
 import Home from './containers/Home'
 import LoginField from './containers/Login'
 import PersonInfo from './containers/PersonInfo'
 import Message from './containers/Message'
 import Article from './containers/Article'
+import checkAuth from './utils/checkAuth'
+
 const routes = (
     <Route path='/' component={App} >
-         <IndexRoute  component={Home}  />
-         <Route path='/login' component={LoginField} ></Route>
-         <Route path='/user/:username'  component={PersonInfo}></Route>
-         <Route path='/message' component={Message}></Route>
-         <Route path='/article' component={Article}></Route>
+        <Route onChange={checkAuth}>
+            <IndexRoute  component={Home}  />
+            <Route path='/login' component={LoginField} ></Route>
+            <Route path='/user/:username'  component={PersonInfo}></Route>
+            <Route path='/message' component={Message}></Route>
+            <Route path='/article' component={Article}></Route>
+            <Redirect from='*' to='/' />
+         </Route>
     </Route>
-  
+    
 );
 
 export default routes;

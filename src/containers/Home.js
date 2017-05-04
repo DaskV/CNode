@@ -64,25 +64,28 @@ class Home extends Component {
             if(windowH+scrollT+100>contentH){              
                 this.loadMore();
             }
+            if(scrollT===0){
+                 document.getElementsByClassName('back')[0].style.display = 'none';
+            }
         }
 
 
     }
     componentWillUnmount(){
-      window.onscroll=()=>{
+        window.onscroll=()=>{  //消除scroll对其他页面影响
           return
-      }
+        }
     }
     render() {
         const {selectTab, isFetching, topics, page,hasnot_read_messages,show,avatar_url,create_at,githubUsername,loginname,score,success} = this.props;
         const {...personinfo}={avatar_url,create_at,githubUsername,loginname,score,success};
-        
+
         return (
             <div>
                 <Header filter={selectTab} tabs={this.tabs} unreadcount={hasnot_read_messages.length} isshow={show}  OnhandleTabClick={this.handleClick}  Logout={this.handleLogout} personinfo={personinfo} >
                     {this
                         .tabs
-                        .map((tab, index) => tab.filter === selectTab &&< div key={index} className="fadeIn" > <ListArticle topics={topics}/>  </div>
+                        .map((tab, index) => tab.filter === selectTab &&< div key={index} > <ListArticle topics={topics}/>  </div>
                                                                               
                         )}
 
