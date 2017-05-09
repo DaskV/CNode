@@ -15,7 +15,7 @@ const routes = (
             <Route path='/login' component={LoginField} ></Route>
             <Route path='/user/:username'  component={PersonInfo}></Route>
             <Route path='/message' component={Message}></Route>
-            <Route path='/article' component={Article}></Route>
+            <Route path='/article/:articleId' component={Article}></Route>
             <Redirect from='*' to='/' />
          </Route>
     </Route>

@@ -22,6 +22,7 @@ export const MARK_MESSAGE='MARK_MESSAGE';
 //Article type
 export const REQUEST_ARTICLE='REQUEST_ARTICLE';
 export const RECEIVE_ARTICLE='RECEIVE_ARTICLE';
+export const CHANGE_CURRENT_TOPICID='CHANGE_CURRENT_TOPICID';
 
 // Layout action creater
 
@@ -210,6 +211,14 @@ export function fetch_mark_message(msgId,accessToken){
 }
 
 //Article
+function changeCurrentTopicId(articleId){
+    return{
+        type:CHANGE_CURRENT_TOPICID,
+        articleId
+    }
+
+}
+
 function request_article(articleId){
     return{
         type:REQUEST_ARTICLE,
@@ -222,5 +231,22 @@ function receive_article(articleId,details){
         type:RECEIVE_ARTICLE,
         articleId,
         details
+    }
+}
+
+export function fetch_article(articleId){
+    return function(dispatch){
+        dispatch(request_article(articleId))
+        dispatch(changeCurrentTopicId(articleId))
+        fetch(`api/v1/topic/${articleId}`)
+            .then(res=>res.json())
+            .then(json=>{
+                if(json.success==true){
+                    dispatch(receive_article(articleId,json.data))
+                }
+                else{
+                    
+                }
+            })
     }
 }

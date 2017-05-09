@@ -1,8 +1,8 @@
 import React, {Component, PropTypes} from 'react'
 import {connect} from 'react-redux'
 import {fetch_accessToken} from '../action'
-import LoginField from '../components/Login/Login';
-
+import LoginField from '../components/Login/Login'
+import loginBg from '../utils/loginBg'
 class Login extends Component {
 
     state={
@@ -33,9 +33,13 @@ class Login extends Component {
 
         }
     }
+    componentDidMount() {
+       loginBg(this.refs.loginBg) 
+    }
     render() {
         return (
             <div>
+                <canvas ref='loginBg' style={{position:'fixed'}}></canvas>
                 <LoginField submitClick={this.handleSubmit} />
             </div>
         );

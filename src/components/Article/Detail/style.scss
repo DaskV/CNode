@@ -4,7 +4,20 @@
     .title{
         display: inline-block;
         font-size: 0.7rem;
-        font-weight: bold;
-        padding: 0.3rem 0;
+        font-weight: bold; 
     }
+     .right{
+        vertical-align: middle;          
+        .authorname{
+            font-weight: 600;
+        }
+    }
+    .am-list-body{
+        border-top: none;
+    }
+}
+.ActivityIndicator{
+    position: absolute;
+    left: 35%;
+    top: 30%;
 }

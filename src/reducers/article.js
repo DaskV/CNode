@@ -1,11 +1,17 @@
-import  {REQUEST_ARTICLE,RECEIVE_ARTICLE} from'../action'
+import  {REQUEST_ARTICLE,RECEIVE_ARTICLE,CHANGE_CURRENT_TOPICID} from'../action'
 
 
-function artilce(state,action){
-
+export function article(state= {
+				currentArticleId: ''
+}, action){
     let stateItem= state[action.articleId] || {}
 
     switch(action.type){
+        case CHANGE_CURRENT_TOPICID:
+             return {
+                    ...state,
+                    currentArticleId: action.articleId
+		        }
         case REQUEST_ARTICLE:
             stateItem={
                 ...stateItem,
@@ -26,6 +32,8 @@ function artilce(state,action){
                 ...state,
                 [action.articleId]:stateItem
             }
+        default:
+            return state
         
     }
 }

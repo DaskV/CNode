@@ -1,6 +1,7 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react'
+import {Link} from 'react-router'
 import {List} from 'antd-mobile'
-import getTime from '../../utils/getTime';
+import getTime from '../../utils/getTime'
 import './style.scss'
 const Item = List.Item;
 const Brief = Item.Brief; 
@@ -19,17 +20,19 @@ class MessageContent extends Component {
         )
         const hasInfo= info.map((item,index)=>{            
           return (
-            <Item
-                multipleLine
-                thumb={item.author.avatar_url}
-                onClick={() => {this.handlClick(item.id)}}
-                platform="android"
-                key={index}
-                >
-                <div className="small name">{item.author.loginname} <span className="time">{getTime(item.reply.create_at)}</span></div>
-                <div className="small content" dangerouslySetInnerHTML={{__html:item.reply.content}}></div>
-                <div className="small"><span className="from">主题:{item.topic.title}</span></div>
-            </Item>         
+             <Link to={`/article/${item.id}`}>
+                <Item
+                    multipleLine
+                    thumb={item.author.avatar_url}
+                    onClick={() => {this.handlClick(item.id)}}
+                    platform="android"
+                    key={index}
+                    >
+                    <div className="small name">{item.author.loginname} <span className="time">{getTime(item.reply.create_at)}</span></div>
+                    <div className="small content" dangerouslySetInnerHTML={{__html:item.reply.content}}></div>
+                    <div className="small"><span className="from">主题:{item.topic.title}</span></div>
+                </Item>         
+            </Link>
           )
         })
         return (

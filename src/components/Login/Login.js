@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react'
 import {WingBlank,List, InputItem,Switch,Button,Toast} from 'antd-mobile'
 import { createForm } from 'rc-form'
 import  Header from '../Common/Header/Header'
-
 const Item = List.Item;
 
 class Login extends Component {
@@ -23,7 +22,7 @@ class Login extends Component {
         return (
             <div>
                 <Header title={"登录"}  search={false} ellipsis={false}/>       
-                    <form style={{paddingTop:"3rem"}}>
+                    <form style={{paddingTop:'3rem',position:'relative'}}>
                         <List renderFooter={() => getFieldError('accesstoken') && getFieldError('accesstoken').join(',')}>
                             <InputItem  {...getFieldProps('accesstoken', {
                                 rules: [{ required: true, message: '请输入Access Token' }],
@@ -36,7 +35,7 @@ class Login extends Component {
                         <WingBlank size="lg">
                             <div style={{textAlign:"right",marginBottom:"1rem"}}>
                                  <label>记住登录信息</label>
-                                 <Switch {...getFieldProps('remember', { initialValue: true, valuePropName: 'checked' })} />
+                                 <Switch {...getFieldProps('remember', { initialValue: true, valuePropName: 'checked' })}  />
                             </div>                     
                             <Button type="primary" onClick={this.onSubmit}>登录</Button>
                         </WingBlank>   

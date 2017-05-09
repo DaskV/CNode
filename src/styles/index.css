@@ -17,11 +17,9 @@
   -webkit-text-stroke-width: 0.2px;
   -moz-osx-font-smoothing: grayscale;
 }
-
-
-body,h2,p,ul,li{
-    margin:0;
-    padding:0;
+pre{
+    background: #e6e7e8;
+    padding: 0.5rem 0.2rem;
 }
 ul{
 	padding-left:0;

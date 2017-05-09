@@ -1,4 +1,5 @@
 import React, {Component, PropTypes} from 'react'
+import {Link} from 'react-router'
 import {WingBlank, WhiteSpace, Card} from 'antd-mobile'
 import Header from '../Common/Header/Header'
 import getTime from '../.././utils/getTime'
@@ -21,10 +22,12 @@ class PersonInfoField extends Component {
                         <Card.Body>
                             {
                                 this.props.allinfo.collect.map((item,index)=>
-                                    <div className="cardiv" key={item.id}>
-                                        <img src={item.author.avatar_url} />
-                                        <span>{item.title}</span>
-                                    </div>
+                                    <Link to={`/article/${item.id}`}>
+                                        <div className="cardiv" key={item.id}>
+                                            <img src={item.author.avatar_url} />
+                                            <span>{item.title}</span>
+                                        </div>
+                                    </Link>
                                 )
                             }
                             
@@ -35,10 +38,12 @@ class PersonInfoField extends Component {
                         <Card.Body>
                             {
                                 this.props.allinfo.recent_replies.map((item,index)=>
-                                    <div className="cardiv" key={item.id}>
-                                        <img src={item.author.avatar_url} />
-                                        <span>{item.title}</span>
-                                    </div>
+                                    <Link to={`/article/${item.id}`}>
+                                        <div className="cardiv" key={item.id}>
+                                            <img src={item.author.avatar_url} />
+                                            <span>{item.title}</span>
+                                        </div>
+                                    </Link>
                                 )
                             }
                             
@@ -49,10 +54,12 @@ class PersonInfoField extends Component {
                         <Card.Body>
                             {
                                 this.props.allinfo.recent_topics.map((item,index)=>
-                                    <div className="cardiv" key={item.id}>
-                                        <img src={item.author.avatar_url} />
-                                        <span>{item.title}</span>
-                                    </div>
+                                    <Link to={`/article/${item.id}`}>
+                                        <div className="cardiv" key={item.id}>
+                                            <img src={item.author.avatar_url} />
+                                            <span>{item.title}</span>
+                                        </div>
+                                    </Link>
                                 )
                             }
                             
