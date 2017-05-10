@@ -1,15 +1,25 @@
 import React, { Component, PropTypes } from 'react';
 import {connect} from 'react-redux'
 import {ActivityIndicator} from 'antd-mobile'
-import {fetch_article } from '../action'
+import {fetch_article,changeCurrentArticleId} from '../action'
 import Detail from '../components/Article/Detail/Detail'
 class Article extends Component {
-
+    fetchhandleUp=(Id)=>{
+        const {dispatch} =this.props;
+        
+    }
     componentDidMount() {
         const { dispatch } =this.props;
         let articleId = this.props.location.pathname;
         articleId=articleId.split("article/")[1];
-        dispatch(fetch_article(articleId))
+        let currentArticleId = this.props.currentArticleId;
+     
+        if(articleId!==currentArticleId){
+              dispatch(fetch_article(articleId))
+        }
+        else{
+            dispatch(changeCurrentArticleId(articleId))
+        }
     }
     componentWillReceiveProps(nextProps) {
         
@@ -18,7 +28,7 @@ class Article extends Component {
     render() {
         const {details,isFetching} =this.props;
         return (                    
-              <Detail info={details}  isFetching={isFetching}/>                         
+              <Detail info={details}  isFetching={isFetching}   handleUp={this.fetchhandleUp} />                         
         );
     }
 }
@@ -32,7 +42,9 @@ function mapStateToProps(state) {
         details:[],
         isFetching:true
     }
-    return {details,isFetching}
+
+    const {currentArticleId}=state.article
+    return {details,isFetching,currentArticleId}
 }
 
 export default connect(mapStateToProps)(Article);

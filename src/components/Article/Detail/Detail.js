@@ -2,14 +2,21 @@ import React, { Component, PropTypes } from 'react';
 import {WingBlank,List,ActivityIndicator,Badge} from 'antd-mobile'
 import Header from '../../Common/Header/Header'
 import getTime from '../../../utils/getTime'
+import getFloor from '../../../utils/getFloor'
 import './style.scss'
 
 const Item = List.Item;
 const Brief= Item.Brief;
 class Detail extends Component {
+
+    handleUp=(replyId)=>{
+        this.props.handleUp(replyId)
+    }
+
     render() {
-        const info = this.props.info;
+        const info = this.props.info ||[];
         const isFetching =this.props.isFetching;
+        let replysm=getFloor(info.replies);   
         return (
             <div>
                 <Header search={false} ellipsis={false} title={"主题"}></Header>
@@ -37,6 +44,34 @@ class Detail extends Component {
                                 </List>
                             </header>
                             <div  dangerouslySetInnerHTML={{__html:info.content}} style={{paddingBottom:"1rem"}}></div>
+                            <div>
+                                 <List className="my-list reply">   
+                                     {
+                                         replysm.map((item,index)=>
+                                            <div key={index} style={{borderBottom:"1px solid #ddd"}}>
+                                                <Item
+                                                    multipleLine
+                                                    thumb={item.author.avatar_url}
+                                                    key={item.id}
+                                                    style={{paddingLeft:0}}
+                                                >
+                                                    <div className="right">
+                                                        <span className="authorname">{item.author.loginname}</span>
+                                                    </div>
+                                                    <Brief><span style={{color:"green"}}>{index+1}楼</span>·{getTime(item.create_at)}</Brief>        
+                                                    <div className="handle">
+                                                        <div className="up" onClick={this.handleUp(item.id)} ><i className="iconfont" style={{ color:item.is_uped?"red":"#717171"}} >&#xe717;</i><span>{item.ups.length}</span></div>
+                                                        <div className="rep"><i className="iconfont">&#xe626;</i></div>     
+                                                    </div>                                                                   
+                                                </Item>   
+                                                <div style={{ display:item.floor===""?"none":"inline-block"}} >回复:{item.floor}楼</div>
+                                                <div  dangerouslySetInnerHTML={{__html:item.content}}></div>
+                                            </div>
+                                         )
+                                     }                                  
+                                 </List>                               
+                            </div>
+
                         </WingBlank>
                     </div>       
                    :

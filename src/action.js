@@ -211,7 +211,7 @@ export function fetch_mark_message(msgId,accessToken){
 }
 
 //Article
-function changeCurrentTopicId(articleId){
+export function changeCurrentArticleId(articleId){
     return{
         type:CHANGE_CURRENT_TOPICID,
         articleId
@@ -237,7 +237,7 @@ function receive_article(articleId,details){
 export function fetch_article(articleId){
     return function(dispatch){
         dispatch(request_article(articleId))
-        dispatch(changeCurrentTopicId(articleId))
+        dispatch(changeCurrentArticleId(articleId))
         fetch(`api/v1/topic/${articleId}`)
             .then(res=>res.json())
             .then(json=>{
@@ -246,6 +246,24 @@ export function fetch_article(articleId){
                 }
                 else{
                     
+                }
+            })
+    }
+}
+
+export function fetch_handleup(replyId,accessToken){
+    return function(dispatch){
+        fetch(`api/v1/reply/${replyId}/ups`,{
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body: `accesstoken=${accessToken}`
+        })
+            .then(res=>res.json())
+            .then(json=>{
+                if(json.success==true){
+
                 }
             })
     }

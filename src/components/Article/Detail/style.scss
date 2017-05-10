@@ -15,6 +15,30 @@
     .am-list-body{
         border-top: none;
     }
+    .reply{
+        .am-list-body div:not(:last-child) .am-list-line:after{
+            border: none;
+        }
+        .handle{
+            position: absolute;
+            right: 10%;
+            top: 40%;
+            i{
+                font-size: 0.8rem;
+                color: #717171;
+            }
+            span{
+                font-size: 0.65rem;
+                margin-left: 0.2rem;
+            }
+            div{
+                float: left;
+            }
+            .rep{
+                margin-left: 0.5rem;
+            }
+        }
+    }
 }
 .ActivityIndicator{
     position: absolute;
