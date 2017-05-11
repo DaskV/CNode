@@ -23,8 +23,12 @@ export const MARK_MESSAGE='MARK_MESSAGE';
 export const REQUEST_ARTICLE='REQUEST_ARTICLE';
 export const RECEIVE_ARTICLE='RECEIVE_ARTICLE';
 export const CHANGE_CURRENT_TOPICID='CHANGE_CURRENT_TOPICID';
+export const SWITCH_HANDLEUP='SWITCH_HANDLEUP';
+export const SWITCH_CENCER='SWITCH_CENCER';
 
-// Layout action creater
+
+
+// Layout
 
 
 function request_topics(tab){
@@ -251,7 +255,7 @@ export function fetch_article(articleId){
     }
 }
 
-export function fetch_handleup(replyId,accessToken){
+export function fetch_handleup(replyId,accessToken,index){
     return function(dispatch){
         fetch(`api/v1/reply/${replyId}/ups`,{
             method: 'POST',
@@ -263,8 +267,47 @@ export function fetch_handleup(replyId,accessToken){
             .then(res=>res.json())
             .then(json=>{
                 if(json.success==true){
-
+                    dispatch(switch_handleup(replyId,index,json.success,json.action))
                 }
             })
+    }
+}
+
+function switch_handleup(replyId,index,success,action){
+    return{
+        type:SWITCH_HANDLEUP,
+        replyId,
+        index,
+        success,
+        action
+    }
+}
+
+
+
+export function fetch_switchcencer(articleId,accesstoken,deny=false){
+    let target= "collect";
+    if(deny){
+        target="de_collect"
+    }
+    return function(dispatch){
+        fetch(`api/v1/topic_collect/${target}`,{
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body: `accesstoken=${accessToken}&topic_id=${articleId}`
+        })
+            .then(res=>res.json())
+            .then(json=>{
+                 dispatch(json.success)
+            })
+    }
+}
+
+function switch_cencer(success){
+    return{
+        type:SWITCH_CENCER,
+        success
     }
 }

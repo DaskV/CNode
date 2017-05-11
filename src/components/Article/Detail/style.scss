@@ -19,9 +19,10 @@
         .am-list-body div:not(:last-child) .am-list-line:after{
             border: none;
         }
-        .handle{
+    }
+    .handle{
             position: absolute;
-            right: 10%;
+            right: 5%;
             top: 40%;
             i{
                 font-size: 0.8rem;
@@ -38,7 +39,6 @@
                 margin-left: 0.5rem;
             }
         }
-    }
 }
 .ActivityIndicator{
     position: absolute;

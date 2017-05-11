@@ -3,11 +3,11 @@
 
 @font-face {
   font-family: 'iconfont';  /* project id 275150 */
-  src: url('//at.alicdn.com/t/font_lejl99smbfn7b9.eot');
-  src: url('//at.alicdn.com/t/font_lejl99smbfn7b9.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_lejl99smbfn7b9.woff') format('woff'),
-  url('//at.alicdn.com/t/font_lejl99smbfn7b9.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_lejl99smbfn7b9.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_ni6f8ik7eqh3erk9.eot');
+  src: url('//at.alicdn.com/t/font_ni6f8ik7eqh3erk9.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_ni6f8ik7eqh3erk9.woff') format('woff'),
+  url('//at.alicdn.com/t/font_ni6f8ik7eqh3erk9.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_ni6f8ik7eqh3erk9.svg#iconfont') format('svg');
 }
 .iconfont {
   font-family:"iconfont" !important;
@@ -18,8 +18,9 @@
   -moz-osx-font-smoothing: grayscale;
 }
 pre{
-    background: #e6e7e8;
+    background: #f6f8fa;
     padding: 0.5rem 0.2rem;
+    overflow-x: auto;
 }
 ul{
 	padding-left:0;
@@ -69,6 +70,9 @@ a:hover,a:link,a:visited,a:active{
 }
 .markdown-text p{
     line-height: 1.5;
+}
+.markdown-text a{
+    word-break: break-word;
 }
 .markdown-text ul{
     padding-left: 2em;

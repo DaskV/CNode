@@ -9,12 +9,10 @@ class Article extends Component {
         
     }
     componentDidMount() {
-        const { dispatch } =this.props;
+        const { dispatch ,article} =this.props;
         let articleId = this.props.location.pathname;
         articleId=articleId.split("article/")[1];
-        let currentArticleId = this.props.currentArticleId;
-     
-        if(articleId!==currentArticleId){
+        if(!article[articleId]){
               dispatch(fetch_article(articleId))
         }
         else{
@@ -42,9 +40,8 @@ function mapStateToProps(state) {
         details:[],
         isFetching:true
     }
-
-    const {currentArticleId}=state.article
-    return {details,isFetching,currentArticleId}
+    const {article}=state
+    return {details,isFetching,article}
 }
 
 export default connect(mapStateToProps)(Article);

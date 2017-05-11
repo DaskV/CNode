@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react'
+import {Link} from 'react-router'
 import {WingBlank,List,ActivityIndicator,Badge} from 'antd-mobile'
 import Header from '../../Common/Header/Header'
 import getTime from '../../../utils/getTime'
@@ -36,9 +37,12 @@ class Detail extends Component {
                                     >
                                     <div className="right">
                                         {info.top===true?<Badge text="置顶" className="badges" style={{backgroundColor:"#fff",borderRadius: 5, border:"1px solid red",color:"red" ,marginRight: "0.25rem" }}/>:""}
-                                        {info.good===true?<Badge text="加精" className="badges" style={{backgroundColor:"#fff",borderRadius: 5,border:"1px solid #108ee9",color:"#108ee9",marginRight: "0 0.25rem"}}/>:""}
-                                        <span className="authorname">{info.author.loginname}</span>
+                                        {info.good===true?<Badge text="加精" className="badges" style={{backgroundColor:"#fff",borderRadius: 5,border:"1px solid #108ee9",color:"#108ee9",marginRight: "0.25rem"}}/>:""}
+                                        <Link to={`/user/${info.author.loginname}`}><span className="authorname">{info.author.loginname}</span></Link>
                                     </div>
+                                     <div className="handle">
+                                         <div className="concern"><i className="iconfont">&#xe739;</i></div>
+                                     </div>
                                     <Brief>{getTime(info.create_at)}创建·{info.visit_count}次浏览</Brief>                                
                                     </Item>                         
                                 </List>
@@ -55,10 +59,10 @@ class Detail extends Component {
                                                     key={item.id}
                                                     style={{paddingLeft:0}}
                                                 >
-                                                    <div className="right">
-                                                        <span className="authorname">{item.author.loginname}</span>
+                                                    <div className="right" style={{fontSize:"0.55rem"}}>
+                                                       <Link to={`/user/${item.author.loginname}`}><span className="authorname">{item.author.loginname}</span></Link>
                                                     </div>
-                                                    <Brief><span style={{color:"green"}}>{index+1}楼</span>·{getTime(item.create_at)}</Brief>        
+                                                    <Brief style={{fontSize:"0.55rem"}}><span style={{color:"green"}}>{index+1}楼</span>·{getTime(item.create_at)}</Brief>        
                                                     <div className="handle">
                                                         <div className="up" onClick={this.handleUp(item.id)} ><i className="iconfont" style={{ color:item.is_uped?"red":"#717171"}} >&#xe717;</i><span>{item.ups.length}</span></div>
                                                         <div className="rep"><i className="iconfont">&#xe626;</i></div>     
