@@ -6,6 +6,13 @@
         font-size: 0.7rem;
         font-weight: bold; 
     }
+
+}
+.ActivityIndicator{
+    position: absolute;
+    left: 35%;
+    top: 30%;
+}
      .right{
         vertical-align: middle;          
         .authorname{
@@ -16,9 +23,14 @@
         border-top: none;
     }
     .reply{
+        background: #fff;
+        .am-list-header{
+            padding-left: 0
+        }
         .am-list-body div:not(:last-child) .am-list-line:after{
             border: none;
         }
+        
     }
     .handle{
             position: absolute;
@@ -39,9 +51,3 @@
                 margin-left: 0.5rem;
             }
         }
-}
-.ActivityIndicator{
-    position: absolute;
-    left: 35%;
-    top: 30%;
-}

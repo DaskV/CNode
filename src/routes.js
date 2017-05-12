@@ -6,6 +6,7 @@ import LoginField from './containers/Login'
 import PersonInfo from './containers/PersonInfo'
 import Message from './containers/Message'
 import Article from './containers/Article'
+import ArticleAdd from './containers/ArticleAdd'
 import checkAuth from './utils/checkAuth'
 
 const routes = (
@@ -16,6 +17,7 @@ const routes = (
             <Route path='/user/:username'  component={PersonInfo}></Route>
             <Route path='/message' component={Message}></Route>
             <Route path='/article/:articleId' component={Article}></Route>
+            <Route path='/add' component={ArticleAdd}></Route>
             <Redirect from='*' to='/' />
          </Route>
     </Route>

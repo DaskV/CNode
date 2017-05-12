@@ -1,29 +1,49 @@
 import React, { Component, PropTypes } from 'react'
 import {Link} from 'react-router'
-import {WingBlank,List,ActivityIndicator,Badge} from 'antd-mobile'
+import {WingBlank,List,ActivityIndicator,Badge,Toast} from 'antd-mobile'
 import Header from '../../Common/Header/Header'
 import getTime from '../../../utils/getTime'
-import getFloor from '../../../utils/getFloor'
 import './style.scss'
 
 const Item = List.Item;
 const Brief= Item.Brief;
 class Detail extends Component {
-
-    handleUp=(replyId)=>{
-        this.props.handleUp(replyId)
+    constructor(){
+        super()
+        this.state={
+            isCencered:false
+        }
     }
-
+    isCencer(id){
+        this.props.switchcencer(id,this.state.isCencered);
+        this.setState({isCencered:!this.state.isCencered})     
+        if(!this.state.isCencered){
+            Toast.info("关注成功",1)
+        }
+        else{
+            Toast.info("取消关注",1)
+        }
+    }
+    updateCollect(props){          //  从collect 树来判断 文章是否已搜藏
+        const {collect,info} =props;
+        console.warn(info.id)
+        let collected = collect.some(topic=>{
+           return  topic.id ===info.id
+        })
+        this.setState({
+            isCencered:collected
+        })
+    }
+    componentWillReceiveProps(nextProps) {
+       if(nextProps.info){        //排除fetch时没有info的影响
+            this.updateCollect(nextProps)
+       } 
+    }
     render() {
         const info = this.props.info ||[];
-        const isFetching =this.props.isFetching;
-        let replysm=getFloor(info.replies);   
         return (
             <div>
-                <Header search={false} ellipsis={false} title={"主题"}></Header>
                {
-                   isFetching===false
-                   ?
                    <div className="topic">
                         <WingBlank>
                             <header>
@@ -41,47 +61,16 @@ class Detail extends Component {
                                         <Link to={`/user/${info.author.loginname}`}><span className="authorname">{info.author.loginname}</span></Link>
                                     </div>
                                      <div className="handle">
-                                         <div className="concern"><i className="iconfont">&#xe739;</i></div>
+                                         <div className="concern" onClick={()=>this.isCencer(info.id)} ><i className="iconfont" style={{color: this.state.isCencered?"red":"#717171"}} >&#xe739;</i></div>
                                      </div>
                                     <Brief>{getTime(info.create_at)}创建·{info.visit_count}次浏览</Brief>                                
                                     </Item>                         
                                 </List>
                             </header>
-                            <div  dangerouslySetInnerHTML={{__html:info.content}} style={{paddingBottom:"1rem"}}></div>
-                            <div>
-                                 <List className="my-list reply">   
-                                     {
-                                         replysm.map((item,index)=>
-                                            <div key={index} style={{borderBottom:"1px solid #ddd"}}>
-                                                <Item
-                                                    multipleLine
-                                                    thumb={item.author.avatar_url}
-                                                    key={item.id}
-                                                    style={{paddingLeft:0}}
-                                                >
-                                                    <div className="right" style={{fontSize:"0.55rem"}}>
-                                                       <Link to={`/user/${item.author.loginname}`}><span className="authorname">{item.author.loginname}</span></Link>
-                                                    </div>
-                                                    <Brief style={{fontSize:"0.55rem"}}><span style={{color:"green"}}>{index+1}楼</span>·{getTime(item.create_at)}</Brief>        
-                                                    <div className="handle">
-                                                        <div className="up" onClick={this.handleUp(item.id)} ><i className="iconfont" style={{ color:item.is_uped?"red":"#717171"}} >&#xe717;</i><span>{item.ups.length}</span></div>
-                                                        <div className="rep"><i className="iconfont">&#xe626;</i></div>     
-                                                    </div>                                                                   
-                                                </Item>   
-                                                <div style={{ display:item.floor===""?"none":"inline-block"}} >回复:{item.floor}楼</div>
-                                                <div  dangerouslySetInnerHTML={{__html:item.content}}></div>
-                                            </div>
-                                         )
-                                     }                                  
-                                 </List>                               
-                            </div>
-
-                        </WingBlank>
+                            <div  dangerouslySetInnerHTML={{__html:info.content}} style={{paddingBottom:"1rem"}}></div>                           
+                      </WingBlank>
                     </div>       
-                   :
-                    <ActivityIndicator text="加载中..."  size="large" className="ActivityIndicator"  />
-               }
-       
+               }    
             </div>
         );
     }

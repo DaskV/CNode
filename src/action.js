@@ -179,7 +179,7 @@ export function fetch_message(accessToken){
         fetch(`api/v1/messages?accesstoken=${accessToken}`)
             .then(res=>res.json())
             .then(json=>{
-                dispatch(get_message(json.data))
+                dispatch(get_message(json.data))              
             })
     }
 }
@@ -273,7 +273,7 @@ export function fetch_handleup(replyId,accessToken,index){
     }
 }
 
-function switch_handleup(replyId,index,success,action){
+function switch_handleup(replyId,index,success,action){    //暂时没有想到如何更新“点赞”的树
     return{
         type:SWITCH_HANDLEUP,
         replyId,
@@ -285,7 +285,7 @@ function switch_handleup(replyId,index,success,action){
 
 
 
-export function fetch_switchcencer(articleId,accesstoken,deny=false){
+export function fetch_switchcencer(articleId,accessToken,deny=false,loginName){
     let target= "collect";
     if(deny){
         target="de_collect"
@@ -300,7 +300,8 @@ export function fetch_switchcencer(articleId,accesstoken,deny=false){
         })
             .then(res=>res.json())
             .then(json=>{
-                 dispatch(json.success)
+                 dispatch(switch_cencer(json.success))
+                 dispatch(fetch_person_topic_collect(loginName))
             })
     }
 }

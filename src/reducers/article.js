@@ -1,4 +1,4 @@
-import  {REQUEST_ARTICLE,RECEIVE_ARTICLE,CHANGE_CURRENT_TOPICID} from'../action'
+import  {REQUEST_ARTICLE,RECEIVE_ARTICLE,CHANGE_CURRENT_TOPICID,SWITCH_CENCER,SWITCH_HANDLEUP} from'../action'
 
 
 export function article(state= {
@@ -31,7 +31,17 @@ export function article(state= {
             return {
                 ...state,
                 [action.articleId]:stateItem
-            }
+            }          
+        case SWITCH_HANDLEUP:
+            return{
+                ...state,
+                switchHandleup:{
+                        replyId:action.replyId,
+                        index:action.index,
+                        success:action.success,
+                        action:action.action
+                }
+            }  
         default:
             return state
         
