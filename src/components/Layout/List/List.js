@@ -13,17 +13,17 @@ class ListArticle extends Component {
         const topics= this.props.topics;
         return (
             <div>
-                 <List  className="my-list">
+                 <List  className="my-list"  >
                      {
                          topics.map((topic,index)=>
-                         <Link to={`/article/${topic.id}`}>
+                         <Link to={`/article/${topic.id}`} key={topic.id}>
                             <Item
                                 multipleLine
                                 thumb={topic.author.avatar_url}
                                 onClick={()=>{}}
                                 key={index}
                             >
-                                <div className="title" Id={topics.id}>
+                                <div className="title">
                                     {topic.top===true?<span className="up">顶</span>:""}
                                     {topic.good===true?<span className="good">精</span>:""}
                                     <span className="text">{topic.title}</span>

@@ -22,7 +22,7 @@ class PersonInfoField extends Component {
                         <Card.Body>
                             {
                                 this.props.allinfo.collect.map((item,index)=>
-                                    <Link to={`/article/${item.id}`}>
+                                    <Link to={`/article/${item.id}`} key={item.id}>
                                         <div className="cardiv" key={item.id}>
                                             <img src={item.author.avatar_url} />
                                             <span>{item.title}</span>
@@ -38,7 +38,7 @@ class PersonInfoField extends Component {
                         <Card.Body>
                             {
                                 this.props.allinfo.recent_replies.map((item,index)=>
-                                    <Link to={`/article/${item.id}`}>
+                                    <Link to={`/article/${item.id}`} key={item.id}>
                                         <div className="cardiv" key={item.id}>
                                             <img src={item.author.avatar_url} />
                                             <span>{item.title}</span>
@@ -54,7 +54,7 @@ class PersonInfoField extends Component {
                         <Card.Body>
                             {
                                 this.props.allinfo.recent_topics.map((item,index)=>
-                                    <Link to={`/article/${item.id}`}>
+                                    <Link to={`/article/${item.id}`} key={item.id}>
                                         <div className="cardiv" key={item.id}>
                                             <img src={item.author.avatar_url} />
                                             <span>{item.title}</span>

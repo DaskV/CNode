@@ -19,7 +19,7 @@ class MessageContent extends Component {
         )
         const hasInfo= info.map((item,index)=>{            
           return (
-             <Link to={`/article/${item.topic.id}`} onClick={this.handlClick(item.id)}>
+             <Link to={`/article/${item.topic.id}`} onClick={this.handlClick(item.id)} key={item.id} >
                     <Item
                         multipleLine
                         thumb={item.author.avatar_url}

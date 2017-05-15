@@ -15,7 +15,7 @@ class BacktoTop extends Component {
                 <div className="back animated fadeInUp"  onClick={()=>{scrolltoTop()}}>
                     <i className="iconfont">&#xe619;</i>
                 </div>
-                <Link to="/">
+                <Link to="/add">
                     <div className="release">
                         <i className="iconfont">&#xe6b9;</i>
                     </div>

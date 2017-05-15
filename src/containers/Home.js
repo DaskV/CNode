@@ -85,7 +85,7 @@ class Home extends Component {
                 <Header filter={selectTab} tabs={this.tabs} unreadcount={hasnot_read_messages.length} isshow={show}  OnhandleTabClick={this.handleClick}  Logout={this.handleLogout} personinfo={personinfo} >
                     {this
                         .tabs
-                        .map((tab, index) => tab.filter === selectTab &&< div key={index} > <ListArticle topics={topics}/>  </div>
+                        .map((tab, index) => tab.filter === selectTab &&<ListArticle topics={topics}  key={index}/>
                                                                               
                         )}
 

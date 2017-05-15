@@ -101,7 +101,7 @@ class Header extends Component {
                         mode="light"
                         onLeftClick={this.onOpenChange}
                         rightContent={[
-                            <Link to='/message'>                                
+                            <Link to='/message' key={0}>                                
                                 <div className="rightcontent">
                                     <i className="iconfont remind">&#xe713;</i>
                                     <Badge text={this.props.unreadcount} className="badge" style={{opacity:this.props.isshow==true ? 1 : 0}} />
