@@ -1,0 +1,74 @@
+.reply-artilce{
+    width: 2rem;
+    height: 2rem;
+    line-height: 2rem;
+    text-align: center;
+    background: #108ee9;
+    box-shadow: 0px 5px 10px #888888;
+    position: fixed;
+    right: 5%;
+    bottom: 15%;
+    z-index: 2;
+    i{
+        color: #fff;
+        font-size: 0.8rem;
+    }
+}
+.comment-modal{
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 10;
+    display: none;
+    .comment{
+    width: 100%;
+    height: 10rem;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transform-origin: 0% 0%;
+    animation: animateEditor 0.5s;
+    background: #f5f5f9;
+        .comment-submit{
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 15%;
+            height: 2rem;
+            background: #fff;
+            border-left: 4px solid #ddd;
+            box-shadow: 0 7px 6px #dcdcdc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1;
+            i{
+                font-size: 1.5rem;
+                color: #108ee9;
+            }
+        }
+        .MDEditor_toolbar{
+            width: 85%;
+        }
+        .MDEditor_editor{
+            max-height: 10rem;
+            overflow-y: auto;
+        }
+        .placeholder{
+            z-index: 0;
+        }
+    }
+   
+
+}
+@keyframes animateEditor{
+        0%{
+            bottom: -100%;
+        }
+        100%{
+            bottom: 0;
+        }
+    }

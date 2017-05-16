@@ -59,6 +59,7 @@ class Detail extends Component {
                                         {info.top===true?<Badge text="置顶" className="badges" style={{backgroundColor:"#fff",borderRadius: 5, border:"1px solid red",color:"red" ,marginRight: "0.25rem" }}/>:""}
                                         {info.good===true?<Badge text="加精" className="badges" style={{backgroundColor:"#fff",borderRadius: 5,border:"1px solid #108ee9",color:"#108ee9",marginRight: "0.25rem"}}/>:""}
                                         <Link to={`/user/${info.author.loginname}`}><span className="authorname">{info.author.loginname}</span></Link>
+                                        <span style={{display:info.author.loginname===this.props.loginname?"inline-block":"none",fontSize:"0.6rem",float:"right",color:"#108ee9"}}>编辑</span>
                                     </div>
                                      <div className="handle">
                                          <div className="concern" onClick={()=>this.isCencer(info.id)} ><i className="iconfont" style={{color: this.state.isCencered?"red":"#717171"}} >&#xe739;</i></div>

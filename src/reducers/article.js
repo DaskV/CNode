@@ -1,8 +1,16 @@
-import  {REQUEST_ARTICLE,RECEIVE_ARTICLE,CHANGE_CURRENT_TOPICID,SWITCH_CENCER,SWITCH_HANDLEUP} from'../action'
+import  {REQUEST_ARTICLE,RECEIVE_ARTICLE,CHANGE_CURRENT_TOPICID,SWITCH_CENCER,SWITCH_HANDLEUP,ADD_ARTICLE,ADD_REPLIES} from'../action'
 
 
 export function article(state= {
-				currentArticleId: ''
+				currentArticleId: '',
+                addArticle:{
+                    success:false,
+                    articleId:""
+                },
+                addReplies:{
+                    success:false,
+                    replyId:""
+                }
 }, action){
     let stateItem= state[action.articleId] || {}
 
@@ -42,6 +50,22 @@ export function article(state= {
                         action:action.action
                 }
             }  
+        case ADD_ARTICLE:
+            return{
+                ...state,
+                addArticle:{
+                    success:action.success,
+                    articleId:action.articleId                
+                }
+            }
+        case ADD_REPLIES:
+            return{
+                ...state,
+                addReplies:{
+                    success:action.success,
+                    replyId:action.replyId
+                }
+            }
         default:
             return state
         

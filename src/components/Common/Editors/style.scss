@@ -1,0 +1,42 @@
+.ed-content{
+    position: relative;
+    .placeholder{
+        position: absolute;
+        top: 2.74rem;
+        left: 0.2rem;
+        color: #a5a5a5;
+        z-index: -1;
+    }
+}
+.MDEditor_toolbar{
+    display: flex;
+    justify-content: space-around;
+    height: 2rem;
+    background: #fff;
+    box-shadow: 0 7px 6px #dcdcdc;
+    button{
+        background: none;
+        border: none;
+        font-size: 0.8rem;
+        svg{
+            width: 0.7rem;
+            height: 1rem;
+        }
+    }  
+    .MDEditor_toolbarButton_label{
+        display: none;
+    } 
+}
+
+.MDEditor_editor{
+    .CodeMirror-vscrollbar{
+        display: none !important;
+    }
+    .CodeMirror-measure{
+        display: none !important;
+    }
+    pre{
+        margin: 0;
+        background: none;
+    }
+}

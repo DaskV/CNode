@@ -67,7 +67,7 @@ class Reply extends Component {
                                                 <div className="up" onClick={()=>this.handleUp(item.id,index)} ><i className="iconfont" 
                                                         style={{ color:this.state.isZan[index] ? "red": "#717171" }} >&#xe717;</i><span>{this.state.ZanNumber[index]}</span>
                                                 </div>
-                                                <div className="rep"><i className="iconfont">&#xe626;</i></div>     
+                                                <div className="rep" onClick={(e)=>this.props.replytoggle(item.id,item.author.loginname)} ><i className="iconfont">&#xe626;</i></div>     
                                             </div>                                                                   
                                         </Item>   
                                         <div style={{ display:item.floor===""?"none":"inline-block"}} >回复:{item.floor}楼</div>

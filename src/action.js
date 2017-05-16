@@ -25,8 +25,8 @@ export const RECEIVE_ARTICLE='RECEIVE_ARTICLE';
 export const CHANGE_CURRENT_TOPICID='CHANGE_CURRENT_TOPICID';
 export const SWITCH_HANDLEUP='SWITCH_HANDLEUP';
 export const SWITCH_CENCER='SWITCH_CENCER';
-
-
+export const ADD_ARTICLE='ADD_ARTICLE';
+export const ADD_REPLIES='ADD_REPLIES';
 
 // Layout
 
@@ -310,5 +310,48 @@ function switch_cencer(success){
     return{
         type:SWITCH_CENCER,
         success
+    }
+}
+
+
+export function fetch_AddArticle(accessToken,stuff){
+    console.log(stuff.info.title)
+    return function(dispatch){
+        fetch(`api/v1/topics`,{
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body: `accesstoken=${accessToken}&title=${stuff.info.title}&tab=${stuff.info.sort}&content=${stuff.content}`
+        })
+            .then(res=>res.json())
+            .then(json=>{
+                dispatch({
+                    type:ADD_ARTICLE,
+                    success:json.success,
+                    articleId:json.topic_id
+                })
+            })
+    }
+}
+
+export function fetch_Addreplies(accessToken,content,replyId="",articleId){
+    let bodys = replyId===""?`accesstoken=${accessToken}&content=${content}`:`accesstoken=${accessToken}&content=${content}&reply_id=${replyId}`;
+    return function(dispatch){
+        fetch(`api/v1/topic/${articleId}/replies`,{
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body: bodys
+        })
+          .then(res=>res.json())
+          .then(json=>{
+              dispatch({
+                  type:ADD_REPLIES,
+                  success:json.success,
+                  replyId:json.reply_id
+              })
+          })
     }
 }

@@ -10,11 +10,12 @@
   "license": "ISC",
   "dependencies": {
     "antd-mobile": "^1.0.8",
-    "draft-js": "^0.10.1",
+    "codemirror": "^5.25.2",
     "isomorphic-fetch": "^2.2.1",
     "normalize.css": "^4.2.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
+    "react-md-editor": "^0.2.2",
     "react-redux": "^5.0.3",
     "react-router": "^2.8.0",
     "react-tap-event-plugin": "^2.0.1",

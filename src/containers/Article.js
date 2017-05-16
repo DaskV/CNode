@@ -1,13 +1,20 @@
 import React, { Component, PropTypes } from 'react';
 import {connect} from 'react-redux'
 import {ActivityIndicator} from 'antd-mobile'
-import {fetch_article,changeCurrentArticleId,fetch_switchcencer,fetch_handleup} from '../action'
+import {fetch_article,changeCurrentArticleId,fetch_switchcencer,fetch_handleup,fetch_Addreplies} from '../action'
 import Detail from '../components/Article/Detail/Detail'
 import Reply from '../components/Article/Detail/Reply'
 import Header from '../components/Common/Header/Header'
+import Comment from '../components/Article/Comment/Comment'
 import getFloor from '../utils/getFloor'
 class Article extends Component {
-
+    constructor(){
+        super()
+        this.state={
+            replyId:"",
+            loginname:""
+        }
+    }
     fetchhandleUp=(Id,i)=>{
         const {dispatch,accessToken} =this.props;      
          dispatch(fetch_handleup(Id,accessToken,i))
@@ -16,7 +23,16 @@ class Article extends Component {
          const {dispatch,accessToken,loginname} =this.props; 
          dispatch(fetch_switchcencer(id,accessToken,state,loginname))
     }
-  
+    fetchComment=(content,replyId)=>{
+        const {dispatch,accessToken,article}=this.props
+        dispatch(fetch_Addreplies(accessToken,content,replyId,article.currentArticleId))
+    }
+    replytoggle=(id,loginname)=>{
+        this.setState({
+            replyId:id,
+            loginname:loginname
+        })
+    }
     componentDidMount() {
         const { dispatch ,article} =this.props;
         let articleId = this.props.location.pathname;
@@ -45,8 +61,9 @@ class Article extends Component {
                   isFetching===false
                   ?
                    <div>
-                        <Detail info={details}  isFetching={isFetching}   handleUp={this.fetchhandleUp}   switchcencer={this.fetchSwitchcencer}  collect={collect}  currentId ={article.currentArticleId} />
-                        <Reply replyinfo={replysm}  handleUp={this.fetchhandleUp} loginname={loginname}   swicthinfo={article.switchHandleup} />
+                        <Detail info={details}  isFetching={isFetching}   handleUp={this.fetchhandleUp}  loginname={loginname}  switchcencer={this.fetchSwitchcencer}  collect={collect}  currentId ={article.currentArticleId} />
+                        <Reply replyinfo={replysm}  handleUp={this.fetchhandleUp} loginname={loginname}   swicthinfo={article.switchHandleup} replytoggle={this.replytoggle}   />
+                        <Comment  setComment={this.fetchComment}  reply={this.state} />                   
                    </div>
                   :
                    <ActivityIndicator text="加载中..."  size="large" className="ActivityIndicator"  />
