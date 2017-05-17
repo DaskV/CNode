@@ -352,6 +352,7 @@ export function fetch_Addreplies(accessToken,content,replyId="",articleId){
                   success:json.success,
                   replyId:json.reply_id
               })
+              dispatch(fetch_article(articleId))  
           })
     }
 }

@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {fetch_accessToken} from '../action'
 import LoginField from '../components/Login/Login'
 import loginBg from '../utils/loginBg'
+import Footer from '../components/Common/Footer/Footer'
 class Login extends Component {
 
     state={
@@ -41,6 +42,7 @@ class Login extends Component {
             <div>
                 <canvas ref='loginBg' style={{position:'fixed'}}></canvas>
                 <LoginField submitClick={this.handleSubmit} />
+                <Footer/>
             </div>
         );
     }

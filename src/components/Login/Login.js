@@ -13,7 +13,7 @@ class Login extends Component {
                 this.props.submitClick(accesstoken,remember);
 
             } else {
-                alert('校验失败');
+                Toast.error('校验失败');
             }
          });
     }

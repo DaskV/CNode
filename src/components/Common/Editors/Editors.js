@@ -23,13 +23,18 @@ class MyEditors extends Component {
             },function(){
                 this.props.getContent(newcode)
             })
-        }
-        
+        }     
+    }
+    componentWillReceiveProps(nextProps) {
+         const nextPropscode=nextProps.foruser===""?"":"@"+ nextProps.foruser +"  ";
+         this.setState({
+             code: nextPropscode
+         })
     }
     render() {
         return (
             <div className="ed-content">               
-               <Editors value={this.state.code || this.props.loginname } onChange={this.updateCode} />
+               <Editors value={this.state.code}  onChange={this.updateCode} />
                <span className="placeholder" style={{display:this.state.placeholder}} >请说点什么吧...</span>
             </div>
         );
