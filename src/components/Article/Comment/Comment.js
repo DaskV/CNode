@@ -31,9 +31,8 @@ class Comment extends Component {
         }
     }
     componentWillReceiveProps(nextProps) {   
-     
         this.setState({
-            modal:"block",
+            modal:nextProps.reply.modal,
             replyId:nextProps.reply.replyId,
             replyname:nextProps.reply.loginname
         })

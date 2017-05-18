@@ -11,6 +11,7 @@ class Article extends Component {
     constructor(){
         super()
         this.state={
+            modal:"none",
             replyId:"",
             loginname:""
         }
@@ -29,6 +30,7 @@ class Article extends Component {
     }
     replytoggle=(id,loginname)=>{
         this.setState({
+            modal:"block",
             replyId:id,
             loginname:loginname
         })
@@ -44,9 +46,6 @@ class Article extends Component {
             dispatch(changeCurrentArticleId(articleId))
 
         }
-
-    }
-    componentWillReceiveProps(nextProps) {
 
     }
 
